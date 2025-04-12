@@ -2,7 +2,16 @@ package Actividad3;
 
 public class BinarySearch {
     public static void main(String[] args) {
+        int[] array = {2, 5, 8, 12, 16, 23, 38, 56, 72, 91};
+        int dato = 23;
         
+        int resultado = busquedaBinaria(array, dato);
+        
+        if (resultado == -1) {
+            System.out.println("El elemento no está presente en el array");
+        } else {
+            System.out.println("Elemento encontrado en el índice: " + resultado);
+        }
     }
 
     public static int busquedaBinaria(int[] array, int dato) {
@@ -23,6 +32,6 @@ public class BinarySearch {
             }
         }
         
-        return -1;
+            return -1;
     }
 }
