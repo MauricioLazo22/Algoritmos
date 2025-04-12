@@ -1,4 +1,4 @@
-package Actividades;
+package Actividad1;
 
 public class Hanoi {
 

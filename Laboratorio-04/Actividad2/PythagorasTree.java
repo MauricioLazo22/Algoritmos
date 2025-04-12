@@ -1,4 +1,4 @@
-package Actividades;
+package Actividad2;
 import javax.swing.JPanel;
 
 public class PythagorasTree {
