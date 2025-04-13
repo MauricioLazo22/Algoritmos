@@ -1,6 +1,6 @@
 package Actividad3;
 
-public class BinarySearch {
+public class BinarySearchIterativo {
     public static void main(String[] args) {
         int[] array = {2, 5, 8, 12, 16, 23, 38, 56, 72, 91};
         int dato = 23;
