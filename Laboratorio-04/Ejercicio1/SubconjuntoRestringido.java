@@ -16,4 +16,30 @@ public class SubconjuntoRestringido {
         return backtrack(arr, 0, 0, target);
     }
 
+    private static boolean backtrack(int[] arr, int index, int sumaActual, int objetivo) {
+        if (index == arr.length)
+            return sumaActual == objetivo;
+        int actual = arr[index];
+        //potencia de 2
+        if (esPotenciaDe2(actual)) {
+            return backtrack(arr, index + 1, sumaActual + actual, objetivo);
+        }
+        //múltiplos de 5 con restricción
+        boolean puedeIncluir = true;
+        if (actual % 5 == 0 && index + 1 < arr.length && arr[index + 1] % 2 != 0) {
+            puedeIncluir = false;
+        }
+        if (!esPotenciaDe2(actual) && actual % 5 != 0) {
+            return backtrack(arr, index + 1, sumaActual, objetivo);
+        }
+        //si se puede agregar prueba la rama de:
+        if (puedeIncluir && backtrack(arr, index + 1, sumaActual + actual, objetivo)) {
+            return true;
+        }
+        // no incluirlo
+        if (backtrack(arr, index + 1, sumaActual, objetivo))
+            return true;
+        return false;
+    }
+
 }
