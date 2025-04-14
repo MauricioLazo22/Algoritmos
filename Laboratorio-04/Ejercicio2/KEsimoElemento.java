@@ -1,5 +1,7 @@
 package Ejercicio2;
 
+import java.util.Random;
+
 public class KEsimoElemento {
     public static int encontrarKEsimo(int[] arr, int k) {
         if (k < 1 || k > arr.length) {
@@ -26,4 +28,22 @@ public class KEsimoElemento {
         }
     }
     
+    private static int particionAleatoria(int[] arr, int izquierda, int derecha) {
+        // Seleccionar un pivote aleatorio
+        Random rand = new Random();
+        int indicePivote = izquierda + rand.nextInt(derecha – izquierda + 1); 
+        swap(arr, indicePivote, derecha); 
+        int pivote = arr[derecha]; 
+        int i = izquierda; 
+
+        for (int j = izquierda; j < derecha; j++) { // 0,4
+            if (arr[j] <= pivote) { // 4 < 6
+                swap(arr, i, j); // {4, 2, 1, 4, 6}
+                i++;
+            }
+        }
+        swap(arr, i, derecha);
+        return i;
+    }
+
 }
