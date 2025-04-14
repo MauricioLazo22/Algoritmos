@@ -31,7 +31,7 @@ public class KEsimoElemento {
     private static int particionAleatoria(int[] arr, int izquierda, int derecha) {
         // Seleccionar un pivote aleatorio
         Random rand = new Random();
-        int indicePivote = izquierda + rand.nextInt(derecha – izquierda + 1); 
+        int indicePivote = izquierda + rand.nextInt(derecha - izquierda + 1); 
         swap(arr, indicePivote, derecha); 
         int pivote = arr[derecha]; 
         int i = izquierda; 
@@ -51,4 +51,20 @@ public class KEsimoElemento {
         arr[i] = arr[j];
         arr[j] = temp;
     }
+
+    public static void main(String[] args) {
+        // Casos de prueba
+        int[] arr1 = {4, 2, 7, 10, 4, 17};
+        System.out.println("Caso 1: " + encontrarKEsimo(arr1, 3)); // Debe devolver 4
+       
+        int[] arr2 = {4, 2, 7, 10, 4, 1, 6};
+        System.out.println("Caso 2: " + encontrarKEsimo(arr2, 5)); // Debe devolver 6
+       
+        int[] arr3 = {4, 2, 7, 1, 4, 6};
+        System.out.println("Caso 3: " + encontrarKEsimo(arr3, 1)); // Debe devolver 1
+       
+        int[] arr4 = {9, 2, 7, 1, 7};
+        System.out.println("Caso 4: " + encontrarKEsimo(arr4, 4)); // Debe devolver 7
+    }
 }
+
