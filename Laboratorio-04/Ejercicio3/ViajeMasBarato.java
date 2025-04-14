@@ -28,5 +28,19 @@ public class ViajeMasBarato {
         }
         return C;
     }
+
+    public static void mostrarMatriz(int[][] M) {
+        for (int[] fila : M) {
+            for (int valor : fila) {
+                if (valor == Integer.MAX_VALUE) {
+                    System.out.print("INF ");
+                } else {
+                    System.out.print(valor + " ");
+                }
+            }
+            System.out.println();
+        }
+    }
     
+       
 }
