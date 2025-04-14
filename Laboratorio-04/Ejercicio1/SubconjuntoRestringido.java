@@ -1,7 +1,7 @@
 package Ejercicio1;
 
 public class SubconjuntoRestringido {
-    
+
     private static boolean esPotenciaDe2(int n) {
         if (n <= 1) {
             return false;
@@ -11,5 +11,9 @@ public class SubconjuntoRestringido {
         }
         return n == 1;
     }
-       
+    
+    public static boolean puedeFormarObjetivo(int[] arr, int target) {
+        return backtrack(arr, 0, 0, target);
+    }
+
 }
