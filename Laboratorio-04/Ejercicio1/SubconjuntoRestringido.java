@@ -42,4 +42,11 @@ public class SubconjuntoRestringido {
         return false;
     }
 
+    public static boolean resolverEntrada(int[] entrada) {
+        int n = entrada[0];
+        int[] datos = new int[n];
+        System.arraycopy(entrada, 1, datos, 0, n);
+        int objetivo = entrada[entrada.length - 1];
+        return puedeFormarObjetivo(datos, objetivo);
+    }
 }
