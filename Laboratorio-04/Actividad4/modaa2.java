@@ -25,4 +25,8 @@ public class modaa2 {
         }
         return moda;
     }
+    public static void main(String[] args) {
+        int[] numerosOrdenados = {1, 2, 2, 2, 3, 4, 5}; // Debe estar ordenado
+        System.out.println("La moda es: " + moda2(numerosOrdenados)); // Imprime 2
+    }
 }
