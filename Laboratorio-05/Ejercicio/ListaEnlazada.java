@@ -63,6 +63,22 @@ public class ListaEnlazada<T> {
 		}
 		return invertida;
 	}
+
+	public static <T> Nodaso<T> insertarAlFinal(Nodaso<T> head, T valor) {
+		Nodaso<T> nuevo = new Nodaso<>(valor);
+	
+		if (head == null) {
+			return nuevo;
+		}
+	
+		Nodaso<?> actual = head;
+		while (actual.getElQueSigue() != null) {
+			actual = actual.getElQueSigue();
+		}
+	
+		actual.setElQueSigue(nuevo);
+		return head;
+	}	
     
     public void insertarPrimero(T dato) {
 		Nodaso<?> nuevoPrimero = new Nodaso<T>(dato);
