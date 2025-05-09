@@ -37,6 +37,13 @@ public class Main {
             tareasCompletadas.add(tareaCompletada); // La agregamos a la lista de tareas completadas
         }
 
-        
+        // Paso 8: Mostrar ambas listas
+        System.out.println("Tareas pendientes:");
+        gestor.imprimirTareas(); // Imprimir tareas restantes en la lista original
+
+        System.out.println("Tareas completadas:");
+        for (Tarea tarea : tareasCompletadas) {
+            System.out.println(tarea); // Imprimir tareas completadas
+        }
     }
 }
