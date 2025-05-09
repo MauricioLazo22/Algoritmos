@@ -12,5 +12,8 @@ public class GestorTareas<T> {
     public void mostrarTareas() {
         lista.recorrerListaEnlazada();
     }
-    
+
+    public boolean estaVacia() {
+        return lista.laListaEsVacia();
+    }
 }
