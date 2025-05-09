@@ -108,6 +108,25 @@ public class ListaEnlazada<T> {
 			}
 		}
 	}
+
+	public static <T> boolean sonIguales(Nodaso<T> head1, Nodaso<T> head2) {
+		Nodaso<?> actual1 = head1;
+		Nodaso<?> actual2 = head2;
+	
+		while (actual1 != null && actual2 != null) {
+			T dato1 = (T) actual1.getDato();
+			T dato2 = (T) actual2.getDato();
+			if (!dato1.equals(dato2)) {
+				return false;
+			}
+			actual1 = actual1.getElQueSigue();
+			actual2 = actual2.getElQueSigue();
+		}
+	
+		return actual1 == null && actual2 == null;
+	}	
+
+	
 	
     public void borrarNodo(T dato) {
 		Nodaso<?> aux = primerito;
