@@ -8,5 +8,9 @@ public class GestorTareas<T> {
     public void agregarTarea(T tarea) {
         lista.insertarPrimero(tarea);
     }
+
+    public void mostrarTareas() {
+        lista.recorrerListaEnlazada();
+    }
     
 }
