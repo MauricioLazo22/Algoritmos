@@ -16,4 +16,8 @@ public class GestorTareas<T> {
     public boolean estaVacia() {
         return lista.laListaEsVacia();
     }
+
+    public int contarTareas() {
+        return lista.longitudDeLista();
+    }
 }
