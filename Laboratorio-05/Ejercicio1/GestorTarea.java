@@ -9,6 +9,10 @@ public class GestorTareas<T> {
         lista.insertarPrimero(tarea);
     }
 
+    public void eliminarTarea(T tarea) {
+        lista.borrarNodo(tarea);
+    }
+
     public void mostrarTareas() {
         lista.recorrerListaEnlazada();
     }
