@@ -47,5 +47,16 @@ public class ListaEnlazada<T> {
 		primerito = nuevoPrimero;
 	}
 	
-     
+    public void insertarUltimo(T dato) {
+		Nodaso<?> nuevoUltimo = new Nodaso<T>(dato);
+		Nodaso<?> aux = primerito;
+		while (aux != null) {
+			aux = aux.getElQueSigue();
+			if(aux == null) {
+				aux.setElQueSigue(nuevoUltimo);
+			}
+		}
+	}
+	
+    
 }
