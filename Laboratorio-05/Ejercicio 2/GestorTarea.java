@@ -49,5 +49,17 @@ public class GestorDeTareas<T> {
         return tareaMasPrioritaria;
     }
 
-    
+    public void invertirTareas() {
+        Nodaso<?> anterior = null;
+        Nodaso<?> actual = lista.getPrimerito();
+        Nodaso<?> siguiente = null;
+
+        while (actual != null) {
+            siguiente = actual.getElQueSigue();
+            actual.setElQueSigue(anterior);
+            anterior = actual;
+            actual = siguiente;
+        }
+        lista.setPrimerito(anterior);
+    }
 }   
