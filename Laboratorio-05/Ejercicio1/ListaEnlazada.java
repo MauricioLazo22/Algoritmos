@@ -23,5 +23,9 @@ public class ListaEnlazada<T> {
 		}
 		return longitud;
 	}
+
+    public void destruirLista() {
+		this.primerito.setElQueSigue(null);
+	}
     
 }
