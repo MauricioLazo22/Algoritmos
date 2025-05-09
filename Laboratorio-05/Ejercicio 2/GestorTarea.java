@@ -30,5 +30,24 @@ public class GestorDeTareas<T> {
         return lista.longitudDeLista();
     }
 
+    public T obtenerTareaMasPrioritaria() {
+        T tareaMasPrioritaria = null;
+        int maxPrioridad = Integer.MIN_VALUE;
+        Nodaso<?> aux = lista.getPrimerito();
+
+        while (aux != null) {
+            T tarea = (T) aux.getDato();
+            if (tarea instanceof Tarea) {
+                Tarea t = (Tarea) tarea;
+                if (t.getPrioridad() > maxPrioridad) {
+                    maxPrioridad = t.getPrioridad();
+                    tareaMasPrioritaria = tarea;
+                }
+            }
+            aux = aux.getElQueSigue();
+        }
+        return tareaMasPrioritaria;
+    }
+
     
 }   
