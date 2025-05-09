@@ -29,6 +29,14 @@ public class Main {
         System.out.println("Lista invertida:");
         gestor.imprimirTareas();
 
+        // Paso 7: Transferir una tarea a una lista de “tareas completadas”
+        List<Tarea> tareasCompletadas = new ArrayList<>();
+        Tarea tareaCompletada = new Tarea("Comprar leche", 2); // O cualquier tarea que queramos transferir
+
+        if (gestor.eliminarTarea(tareaCompletada)) {
+            tareasCompletadas.add(tareaCompletada); // La agregamos a la lista de tareas completadas
+        }
+
         
     }
 }
