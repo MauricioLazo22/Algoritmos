@@ -58,5 +58,15 @@ public class ListaEnlazada<T> {
 		}
 	}
 	
-    
+    public void borrarNodo(T dato) {
+		Nodaso<?> aux = primerito;
+		Nodaso<?> aux2 = aux.getElQueSigue();
+		while (aux != null) {
+			if(aux2.getDato() == dato) {
+				aux.setElQueSigue(aux2.getElQueSigue());
+			}
+			aux = aux.getElQueSigue();
+		}
+	}
+	
 }
