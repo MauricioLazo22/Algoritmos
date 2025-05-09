@@ -53,6 +53,16 @@ public class ListaEnlazada<T> {
 		return false;
 	}
 	
+	public static <T> ListaEnlazada<T> invertirLista(ListaEnlazada<T> original) {
+		ListaEnlazada<T> invertida = new ListaEnlazada<>(null);
+		Nodaso<?> aux = original.getPrimerito();
+		while (aux != null) {
+			T dato = (T) aux.getDato();
+			invertida.insertarPrimero(dato);
+			aux = aux.getElQueSigue();
+		}
+		return invertida;
+	}
     
     public void insertarPrimero(T dato) {
 		Nodaso<?> nuevoPrimero = new Nodaso<T>(dato);
