@@ -4,4 +4,9 @@ public class GestorTareas<T> {
     public GestorTareas(ListaEnlazada<T> lista) {
         this.lista = lista;
     }
+    
+    public void agregarTarea(T tarea) {
+        lista.insertarPrimero(tarea);
+    }
+    
 }
