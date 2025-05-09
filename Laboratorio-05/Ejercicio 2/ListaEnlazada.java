@@ -76,4 +76,13 @@ public class ListaEnlazada<T> {
 			aux = aux.getElQueSigue();
 		}
 	}
+
+	public Nodaso<?> getPrimerito() {
+		return primerito;
+	}
+	
+	public void setPrimerito(Nodaso<?> nodo) {
+		this.primerito = nodo;
+	}
+	
 }
