@@ -79,7 +79,19 @@ public class ListaEnlazada<T> {
 		actual.setElQueSigue(nuevo);
 		return head;
 	}	
-    
+	
+	public static <T> int contarNodos(Nodaso<T> head) {
+		int contador = 0;
+		Nodaso<?> actual = head;
+		while (actual != null) {
+			contador++;
+			actual = actual.getElQueSigue();
+		}
+		return contador;
+	}
+
+	
+
     public void insertarPrimero(T dato) {
 		Nodaso<?> nuevoPrimero = new Nodaso<T>(dato);
 		nuevoPrimero.setElQueSigue(primerito);
