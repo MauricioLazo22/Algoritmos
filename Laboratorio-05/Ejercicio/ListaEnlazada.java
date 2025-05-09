@@ -126,6 +126,37 @@ public class ListaEnlazada<T> {
 		return actual1 == null && actual2 == null;
 	}	
 
+	public static <T> ListaEnlazada<T> concatenarListas(ListaEnlazada<T> lista1, ListaEnlazada<T> lista2) {
+		ListaEnlazada<T> listaConcatenada = new ListaEnlazada<>(null);
+		
+		Nodaso<?> aux1 = lista1.getPrimerito();
+		while (aux1 != null) {
+			listaConcatenada.insertarUltimo((T) aux1.getDato());
+			aux1 = aux1.getElQueSigue();
+		}
+	
+		Nodaso<?> aux2 = lista2.getPrimerito();
+		while (aux2 != null) {
+			listaConcatenada.insertarUltimo((T) aux2.getDato());
+			aux2 = aux2.getElQueSigue();
+		}
+	
+		return listaConcatenada;
+	}
+	
+	public void insertarUltimo(T dato) {
+		Nodaso<?> nuevoUltimo = new Nodaso<T>(dato);
+		Nodaso<?> aux = primerito;
+		
+		if (aux == null) {
+			primerito = nuevoUltimo;  // Si la lista está vacía, el nuevo nodo será el primer nodo
+		} else {
+			while (aux.getElQueSigue() != null) {
+				aux = aux.getElQueSigue();
+			}
+			aux.setElQueSigue(nuevoUltimo);  // Si la lista no está vacía, añadimos al final
+		}
+	}
 	
 	
     public void borrarNodo(T dato) {
