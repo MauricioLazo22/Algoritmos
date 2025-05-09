@@ -13,6 +13,9 @@ public class Main {
         gestor.agregarTarea(tarea2);
         gestor.agregarTarea(tarea3);
 
+        // Paso 3: Eliminar alguna tarea
+        gestor.eliminarTarea(tarea2); // Elimina la tarea "Estudiar Java"
+
         
     }
 }
