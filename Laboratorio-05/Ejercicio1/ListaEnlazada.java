@@ -69,4 +69,11 @@ public class ListaEnlazada<T> {
 		}
 	}
 	
+    public void recorrerListaEnlazada() {
+		Nodaso<?> aux = primerito;
+		while (aux != null) {
+			System.out.println(aux.getDato());
+			aux = aux.getElQueSigue();
+		}
+	}
 }
