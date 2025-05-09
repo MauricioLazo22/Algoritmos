@@ -16,6 +16,10 @@ public class Main {
         // Paso 3: Eliminar alguna tarea
         gestor.eliminarTarea(tarea2); // Elimina la tarea "Estudiar Java"
 
+        // Paso 4: Imprimir todas las tareas actuales
+        System.out.println("Tareas actuales:");
+        gestor.imprimirTareas(); // Muestra todas las tareas restantes
+
         
     }
 }
