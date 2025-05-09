@@ -53,7 +53,7 @@ public class ListaEnlazada<T> {
 		return false;
 	}
 	
-	public static <T> ListaEnlazada<T> invertirLista(ListaEnlazada<T> original) {
+	public static <T> ListaEnlazada<T> inv1ertirLista(ListaEnlazada<T> original) {
 		ListaEnlazada<T> invertida = new ListaEnlazada<>(null);
 		Nodaso<?> aux = original.getPrimerito();
 		while (aux != null) {
@@ -90,9 +90,7 @@ public class ListaEnlazada<T> {
 		return contador;
 	}
 
-	
-
-    public void insertarPrimero(T dato) {
+    public void sertarPrimero(T dato) {
 		Nodaso<?> nuevoPrimero = new Nodaso<T>(dato);
 		nuevoPrimero.setElQueSigue(primerito);
 		primerito = nuevoPrimero;
@@ -156,8 +154,7 @@ public class ListaEnlazada<T> {
 			}
 			aux.setElQueSigue(nuevoUltimo);  // Si la lista no está vacía, añadimos al final
 		}
-	}
-	
+	}	
 	
     public void borrarNodo(T dato) {
 		Nodaso<?> aux = primerito;
