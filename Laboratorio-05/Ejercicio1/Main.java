@@ -9,5 +9,14 @@ public class Main {
         
         System.out.println("Tareas después de agregar:");
         gestor.mostrarTareas();
+
+        String tareaBuscada = "Hacer ejercicio";
+        int posicion = gestor.buscarTarea(tareaBuscada);
+        if (posicion != -1) {
+            System.out.println("La tarea '" + tareaBuscada + "' se encuentra en la posición: " + posicion);
+        } else {
+            System.out.println("La tarea '" + tareaBuscada + "' no fue encontrada.");
+        }
+        
     }
 }
