@@ -27,5 +27,18 @@ public class ListaEnlazada<T> {
     public void destruirLista() {
 		this.primerito.setElQueSigue(null);
 	}
+
+    public int buscar(T dato) {
+		Nodaso<?> aux = primerito;
+		int posicion = 0;
+		while (aux != null) {
+			if (aux.getDato() == dato) {
+				return posicion;
+			}
+			aux = aux.getElQueSigue();
+			posicion++;
+		}
+		return -1;
+	}
     
 }
