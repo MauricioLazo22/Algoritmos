@@ -20,6 +20,15 @@ public class Main {
         System.out.println("Tareas actuales:");
         gestor.imprimirTareas(); // Muestra todas las tareas restantes
 
+        // Paso 5: Verificar si cierta tarea existe
+        boolean existeTarea = gestor.contieneTarea(tarea1);
+        System.out.println("¿La tarea 'Comprar leche' existe? " + existeTarea);
+
+        // Paso 6: Invertir la lista
+        gestor.invertirTareas();
+        System.out.println("Lista invertida:");
+        gestor.imprimirTareas();
+
         
     }
 }
