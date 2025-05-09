@@ -13,6 +13,10 @@ public class GestorTareas<T> {
         lista.borrarNodo(tarea);
     }
 
+    public int buscarTarea(T tarea) {
+        return lista.buscar(tarea);
+    }
+
     public void mostrarTareas() {
         lista.recorrerListaEnlazada();
     }
