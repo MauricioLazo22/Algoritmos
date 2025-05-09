@@ -41,4 +41,11 @@ public class ListaEnlazada<T> {
 		return -1;
 	}
     
+    public void insertarPrimero(T dato) {
+		Nodaso<?> nuevoPrimero = new Nodaso<T>(dato);
+		nuevoPrimero.setElQueSigue(primerito);
+		primerito = nuevoPrimero;
+	}
+	
+     
 }
