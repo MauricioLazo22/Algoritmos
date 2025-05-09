@@ -18,5 +18,17 @@ public class GestorDeTareas<T> {
         return false;
     }
 
+    public boolean contieneTarea(T tarea) {
+        return lista.buscar(tarea) != -1;
+    }
+
+    public void imprimirTareas() {
+        lista.recorrerListaEnlazada();
+    }
+
+    public int contarTareas() {
+        return lista.longitudDeLista();
+    }
+
     
 }   
