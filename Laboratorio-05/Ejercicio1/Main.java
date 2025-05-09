@@ -17,6 +17,13 @@ public class Main {
         } else {
             System.out.println("La tarea '" + tareaBuscada + "' no fue encontrada.");
         }
+
+        gestor.eliminarTarea("Estudiar Java");
+        System.out.println("\nTareas después de eliminar 'Estudiar Java':");
+        gestor.mostrarTareas();
         
+        System.out.println("\nNúmero de tareas restantes: " + gestor.contarTareas());
+        
+        System.out.println("\n¿Está la lista vacía? " + gestor.estaVacia());
     }
 }
