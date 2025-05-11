@@ -15,4 +15,10 @@ public class PriorityQueueLinked<E, P extends Comparable<P>> implements Priority
             colas[i] = new QueueLink<>();
         }
     }
+
+    public void enqueue(E elemento, P prioridad) {
+        int nivelPrioridad = prioridad.compareTo(prioridad);
+        colas[nivelPrioridad].enqueue(elemento);
+    }
+
 }
