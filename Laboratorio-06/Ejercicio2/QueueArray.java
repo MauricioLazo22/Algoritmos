@@ -38,6 +38,20 @@ public class QueueArray<E> implements Queue<E> {
         return data;
     }
 
+     public E front() throws ExceptionIsEmpty {
+        if (isEmpty()) {
+            throw new ExceptionIsEmpty("La cola está vacía");
+        }
+        return array[first];
+    }
+
+    public E back() throws ExceptionIsEmpty {
+        if (isEmpty()) {
+            throw new ExceptionIsEmpty("La cola está vacía");
+        }
+        return array[last];
+    }
+    
     public boolean isFull() {
         return size == capacity;
     }
