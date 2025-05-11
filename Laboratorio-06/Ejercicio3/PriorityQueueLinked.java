@@ -21,4 +21,12 @@ public class PriorityQueueLinked<E, P extends Comparable<P>> implements Priority
         colas[nivelPrioridad].enqueue(elemento);
     }
 
+    public E dequeue() throws ExceptionIsEmpty {
+        for (int i = 0; i < prioridades; i++) {
+            if (!colas[i].isEmpty()) {
+                return colas[i].dequeue();
+            }
+        }
+        throw new ExceptionIsEmpty("Todas las colas están vacías");
+    }
 }
