@@ -16,6 +16,13 @@ public class Test {
             colaStrings.enqueue("Tercero");
             System.out.println("Nuevo contenido: " + colaStrings); // [Segundo, Tercero]
 
+            // Prueba con Integers
+            Queue<Integer> colaInts = new QueueArray<>(2);
+            System.out.println("\n=== Prueba con Integers ===");
+            colaInts.enqueue(100);
+            colaInts.enqueue(200);
+            System.out.println("Back: " + colaInts.back()); // 200
+            colaInts.enqueue(300); // Lanza IllegalStateException (cola llena)
         } catch (ExceptionIsEmpty e) {
             System.err.println("Error de cola vacía: " + e.getMessage());
         } catch (IllegalStateException e) {
