@@ -51,7 +51,7 @@ class PriorityQueueLinkSort<E,N extends Comparable<N>> implements PriorityQueue<
             last = nuevo;
         }
     }
-    
+
     public E dequeue() throws ExceptionIsEmpty {
         if (isEmpty()){
             throw new ExceptionIsEmpty("Cannot remove from an empty queue");
@@ -64,7 +64,9 @@ class PriorityQueueLinkSort<E,N extends Comparable<N>> implements PriorityQueue<
         return aux;
     }
     public E back() throws ExceptionIsEmpty {
-        // include here your code
+        if (isEmpty())
+            throw new ExceptionIsEmpty("La cola está vacía");
+        return last.getData().data;
     }
 
     public E front() throws ExceptionIsEmpty {
@@ -72,7 +74,7 @@ class PriorityQueueLinkSort<E,N extends Comparable<N>> implements PriorityQueue<
     }
 
     public boolean isEmpty() {
-        // include here your code
+        return this.first == null;
     }
     
     // Elements must be included in the string as they are located in the list
