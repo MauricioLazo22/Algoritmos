@@ -25,5 +25,16 @@ public class StackLink<E> implements Stack<E> {
         top = top.getNext();
         return data;
     }
+
+    public E top() throws ExceptionIsEmpty {
+        if (isEmpty()) {
+            throw new ExceptionIsEmpty("La pila está vacía");
+        }
+        return top.getData();
+    }
+
+    public boolean isEmpty() {
+        return top == null;
+    }
     
 }
