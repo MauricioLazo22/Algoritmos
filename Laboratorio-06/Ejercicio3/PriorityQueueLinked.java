@@ -39,5 +39,13 @@ public class PriorityQueueLinked<E, P extends Comparable<P>> implements Priority
         throw new ExceptionIsEmpty("Todas las colas están vacías");
     }
 
+    public E back() throws ExceptionIsEmpty {
+        for (int i = prioridades - 1; i >= 0; i--) {
+            if (!colas[i].isEmpty()) {
+                return colas[i].back();
+            }
+        }
+        throw new ExceptionIsEmpty("Todas las colas están vacías");
+    }
     
 }
