@@ -27,11 +27,20 @@ public class QueueArray<E> implements Queue<E> {
         size++;
     }
 
-
+    public E dequeue() throws ExceptionIsEmpty {
+        if (isEmpty()) {
+            throw new ExceptionIsEmpty("La cola está vacía");
+        }
+        E data = array[first];
+        array[first] = null;
+        first = (first + 1) % capacity;
+        size--;
+        return data;
+    }
 
     public boolean isFull() {
         return size == capacity;
     }
 
-    
+
 }
