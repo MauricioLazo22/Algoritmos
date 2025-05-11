@@ -80,9 +80,14 @@ class PriorityQueueLinkSort<E,N extends Comparable<N>> implements PriorityQueue<
         return this.first == null;
     }
     
-    // Elements must be included in the string as they are located in the list
-    
-    public String toString(){
-    // include here your code
+    public String toString() {
+        String resultado = "";
+        Node<EntryNode> actual = first;
+        while (actual != null) {
+            resultado += "(" + actual.getData().data + ", " + actual.getData().priority + ") -> ";
+            actual = actual.getNext();
+        }
+        resultado += "null";
+        return resultado;
     }
 } 
