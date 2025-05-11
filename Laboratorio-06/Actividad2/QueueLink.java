@@ -39,7 +39,11 @@ class QueueLink<E> implements Queue<E> {
     }
 
     public E front() throws ExceptionIsEmpty {
-        // include here your code 
+        if (this.isEmpty()) {
+			throw new ExceptionIsEmpty("La cola está vacia.");
+		} else {
+			return this.first.getData();
+		}
     }
 
     public boolean isEmpty() {
