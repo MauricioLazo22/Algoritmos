@@ -20,7 +20,14 @@ class StackArray<E> implements Stack<E> {
     }
 
     public E pop() throws ExceptionIsEmpty {
-        // include here your code
+        if (isEmpty()) {
+			throw new ExceptionIsEmpty("La pila está vacia");
+		} else {
+			E itemEliminado = array[tope];
+			array[tope] = null;
+			tope--;
+			return itemEliminado;
+		}
     }
 
     public E top() throws ExceptionIsEmpty {
