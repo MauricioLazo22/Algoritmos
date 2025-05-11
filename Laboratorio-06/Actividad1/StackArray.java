@@ -6,12 +6,17 @@ class StackArray<E> implements Stack<E> {
     private int tope;
 
     public StackArray(int n){
-        this.array = (E[])new Object[n];
+        this.array = (E[]) new Object[n];
         tope = -1;
     }
 
     public void push(E x){
-        // include here your code
+        if (isFull()){
+            System.out.println("La pila esta llena.");
+        } else {
+            tope++;
+		    array[tope] = x;
+        }
     }
 
     public E pop() throws ExceptionIsEmpty {
@@ -27,7 +32,8 @@ class StackArray<E> implements Stack<E> {
     }
 
     public boolean isFull(){
-        // include here your code
+        if (tope == array.length) return true;
+		else  return false;
     }
 
     //The elements must be included in the chain from the one at the top
