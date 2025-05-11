@@ -1,7 +1,7 @@
 package Actividad2;
 import Actividad1.ExceptionIsEmpty;
 
-class QueueLink<E> implements Queue<E> {
+public class QueueLink<E> implements Queue<E> {
 
     private Node<E> first;
     private Node<E> last;
@@ -65,7 +65,7 @@ class QueueLink<E> implements Queue<E> {
                 }
                 actual = actual.getNext();
             }
-	        return resultado;
+	    return resultado;
         } 
 	}
 }
