@@ -51,10 +51,25 @@ public class QueueArray<E> implements Queue<E> {
         }
         return array[last];
     }
-    
+
     public boolean isFull() {
         return size == capacity;
     }
 
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder("[");
+        for (int i = 0, current = first; i < size; i++, current = (current + 1) % capacity) {
+            sb.append(array[current]);
+            if (i < size - 1) {
+                sb.append(", ");
+            }
+        }
+        sb.append("]");
+        return sb.toString();
+    }
 
 }
