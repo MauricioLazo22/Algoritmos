@@ -20,6 +20,10 @@ public class Test {
             strStack.push("Hola");
             strStack.push("Mundo");
             System.out.println(strStack.pop() + " " + strStack.pop()); // Mundo Hola
+
+            // Prueba de errores
+            System.out.println("\n=== Prueba de excepciones ===");
+            strStack.top(); // Lanza ExceptionIsEmpty
             
         } catch (ExceptionIsEmpty e) {
             System.err.println("Error: " + e.getMessage());
