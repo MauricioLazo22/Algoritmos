@@ -14,10 +14,11 @@ class QueueLink<E> implements Queue<E> {
     public void enqueue(E x){
         Node<E> aux = new Node<E>(x);
         if (this.isEmpty()) {
-        this.first = aux;
-        else
-        this.last.setNext(aux);
-        this.last = aux;
+            this.first = aux;
+        } else{
+            this.last.setNext(aux);
+            this.last = aux;
+        }
     }
 
     public E dequeue() throws ExceptionIsEmpty {
@@ -47,13 +48,24 @@ class QueueLink<E> implements Queue<E> {
     }
 
     public boolean isEmpty() {
-        // include here your code
+        return first == null;
     }
 
-    //The elements must be included in the chain from the one at the front
-    //to the one at the back of the queue.
-
-    public String toString(){
-        // include here your code
-    }
-} 
+	public String toString(){
+		if (this.isEmpty()) {
+	        return "La cola está vacía.";
+	    } else {
+            String resultado = "";
+	        Node<E> actual = first;
+	
+            while (actual != null) {
+                resultado += actual.getData();
+                if (actual.getNext() != null) {
+                    resultado += ", ";
+                }
+                actual = actual.getNext();
+            }
+	        return resultado;
+        } 
+	}
+}
