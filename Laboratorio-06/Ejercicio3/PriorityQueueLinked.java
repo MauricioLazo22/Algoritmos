@@ -29,4 +29,15 @@ public class PriorityQueueLinked<E, P extends Comparable<P>> implements Priority
         }
         throw new ExceptionIsEmpty("Todas las colas están vacías");
     }
+
+    public E front() throws ExceptionIsEmpty {
+        for (int i = 0; i < prioridades; i++) {
+            if (!colas[i].isEmpty()) {
+                return colas[i].front();
+            }
+        }
+        throw new ExceptionIsEmpty("Todas las colas están vacías");
+    }
+
+    
 }
