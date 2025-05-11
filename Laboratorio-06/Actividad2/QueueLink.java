@@ -21,7 +21,13 @@ class QueueLink<E> implements Queue<E> {
     }
 
     public E dequeue() throws ExceptionIsEmpty {
-        // include here your code
+        if (this.isEmpty()) {
+			throw new ExceptionIsEmpty("La cola está vacia.");
+		} else {
+			Node<E> aux = first;
+			first = first.getNext();
+			return aux.getData();
+		}
     }
 
     public E back() throws ExceptionIsEmpty {
