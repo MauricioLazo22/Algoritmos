@@ -22,6 +22,11 @@ public class Test {
             pqInt.enqueue(200, "Baja");
             System.out.println("Dequeue: " + pqInt.dequeue()); // 100 (Alta)
             System.out.println("isEmpty: " + pqInt.isEmpty()); // false
+
+            // Prueba de cola vacía
+            PriorityQueue<Boolean, Integer> pqEmpty = new PriorityQueueLinked<>(2);
+            System.out.println("\n=== Prueba vacía ===");
+            pqEmpty.dequeue(); // Lanza ExceptionIsEmpty
             
         } catch (ExceptionIsEmpty e) {
             System.err.println("Error: " + e.getMessage());
