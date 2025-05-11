@@ -13,6 +13,13 @@ public class Test {
             System.out.println("Pop: " + intStack.pop()); // 20
             intStack.push(30);
             intStack.push(40); // Pila llena
+
+            // Prueba con String
+            Stack<String> strStack = new StackArray<>(2);
+            System.out.println("\n=== Prueba con cadenas ===");
+            strStack.push("Hola");
+            strStack.push("Mundo");
+            System.out.println(strStack.pop() + " " + strStack.pop()); // Mundo Hola
             
         } catch (ExceptionIsEmpty e) {
             System.err.println("Error: " + e.getMessage());
