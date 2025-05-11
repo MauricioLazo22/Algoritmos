@@ -31,7 +31,11 @@ class StackArray<E> implements Stack<E> {
     }
 
     public E top() throws ExceptionIsEmpty {
-        // include here your code
+        if (isEmpty()) {
+			throw new ExceptionIsEmpty("La pila está vacia");
+		} else {
+			return array[tope];
+		}
     }
 
     public boolean isEmpty() {
