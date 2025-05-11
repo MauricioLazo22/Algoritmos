@@ -23,6 +23,11 @@ public class Test {
             strStack.push("Oscar");
             System.out.println(strStack.pop() + " " + strStack.pop()); // Hola Ingeniero Oscar
 
+            // Prueba de error
+            System.out.println("\n=== Prueba error ===");
+            Stack<Double> emptyStack = new StackLink<>();
+            emptyStack.pop(); // Lanza excepción
+            
         } catch (ExceptionIsEmpty e) {
             System.err.println("Error: " + e.getMessage());
         }
