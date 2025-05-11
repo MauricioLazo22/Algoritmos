@@ -15,6 +15,14 @@ public class Test {
             System.out.println("Pop: " + intStack.pop());  // 20
             System.out.println("Nuevo estado: " + intStack); // [10]
 
+            // Uso con String
+            Stack<String> strStack = new StackLink<>();
+            System.out.println("\n=== Prueba String ===");
+            strStack.push("Mundo");
+            strStack.push("Ingeniero");
+            strStack.push("Oscar");
+            System.out.println(strStack.pop() + " " + strStack.pop()); // Hola Ingeniero Oscar
+
         } catch (ExceptionIsEmpty e) {
             System.err.println("Error: " + e.getMessage());
         }
