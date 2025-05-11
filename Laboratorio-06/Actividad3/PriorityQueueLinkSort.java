@@ -63,6 +63,7 @@ class PriorityQueueLinkSort<E,N extends Comparable<N>> implements PriorityQueue<
         }
         return aux;
     }
+
     public E back() throws ExceptionIsEmpty {
         if (isEmpty())
             throw new ExceptionIsEmpty("La cola está vacía");
@@ -70,7 +71,9 @@ class PriorityQueueLinkSort<E,N extends Comparable<N>> implements PriorityQueue<
     }
 
     public E front() throws ExceptionIsEmpty {
-        // include here your code 
+        if (isEmpty())
+            throw new ExceptionIsEmpty("La cola está vacía");
+        return first.getData().data;
     }
 
     public boolean isEmpty() {
