@@ -36,5 +36,18 @@ public class StackLink<E> implements Stack<E> {
     public boolean isEmpty() {
         return top == null;
     }
-    
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder("[");
+        Node<E> current = top;
+        while (current != null) {
+            sb.append(current.getData());
+            if (current.getNext() != null) {
+                sb.append(", ");
+            }
+            current = current.getNext();
+        }
+        sb.append("]");
+        return sb.toString();
+    }
 }
