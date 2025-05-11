@@ -47,10 +47,17 @@ class StackArray<E> implements Stack<E> {
 		else  return false;
     }
 
-    //The elements must be included in the chain from the one at the top
-    //to the one at the bottom of the stack.
-
     public String toString(){
-        // include here your code
+        String resultado = "[";
+	    if (tope >= 0) {
+	        for (int i = 0; i <= tope; i++) {
+	            resultado += array[i];
+	            if (i < tope) {
+	                resultado += ", ";
+	            }
+	        }
+	    }
+	    resultado += "]";
+	    return resultado;
     }
 } 
