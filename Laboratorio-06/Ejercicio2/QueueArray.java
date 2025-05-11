@@ -18,4 +18,20 @@ public class QueueArray<E> implements Queue<E> {
         this.capacity = capacity;
     }
 
+    public void enqueue(E x) {
+        if (isFull()) {
+            throw new IllegalStateException("La cola está llena");
+        }
+        last = (last + 1) % capacity;
+        array[last] = x;
+        size++;
+    }
+
+
+
+    public boolean isFull() {
+        return size == capacity;
+    }
+
+    
 }
