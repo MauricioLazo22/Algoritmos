@@ -1,7 +1,7 @@
 package Actividad3;
 import Actividad1.ExceptionIsEmpty;
 
-class PriorityQueueLinkSort<E,N> implements PriorityQueue<E,N> {
+class PriorityQueueLinkSort<E,N extends Comparable<N>> implements PriorityQueue<E,N> {
 
     class EntryNode{
         E data;
@@ -22,9 +22,36 @@ class PriorityQueueLinkSort<E,N> implements PriorityQueue<E,N> {
     }
 
     public void enqueue(E x, N pr){
-        // The list must be ordered by the priority of the elements.
-        // The higher the priority, the element is further to the front.
+        Node<EntryNode> nuevo = new Node<>(new EntryNode(x, pr));
+
+        if (isEmpty()) {
+            this.first = nuevo;
+            this.last = nuevo;
+            return;
+        }
+    
+        if (pr.compareTo(first.getData().priority) < 0) {
+            nuevo.setNext(first);
+            first = nuevo;
+            return;
+        }
+    
+        Node<EntryNode> anterior = first;
+        Node<EntryNode> actual = first.getNext();
+    
+        while (actual != null && pr.compareTo(actual.getData().priority) >= 0) {
+            anterior = actual;
+            actual = actual.getNext();
+        }
+    
+        nuevo.setNext(actual);
+        anterior.setNext(nuevo);
+    
+        if (nuevo.getNext() == null) {
+            last = nuevo;
+        }
     }
+    
     public E dequeue() throws ExceptionIsEmpty {
         if (isEmpty()){
             throw new ExceptionIsEmpty("Cannot remove from an empty queue");
@@ -33,8 +60,8 @@ class PriorityQueueLinkSort<E,N> implements PriorityQueue<E,N> {
         this.first = this.first.getNext();
         if (this.first == null){
             this.last = null;
-            return aux;
         }
+        return aux;
     }
     public E back() throws ExceptionIsEmpty {
         // include here your code
