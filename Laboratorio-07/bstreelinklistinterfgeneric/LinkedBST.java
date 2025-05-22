@@ -222,6 +222,10 @@ public class LinkedBST<E extends Comparable<E>> implements BinarySearchTree<E>{
         return 1 + contarTodos(nodo.left) + contarTodos(nodo.right);
     }
 
+    public int countNodes() {
+        return contarNodosNoHojas(root);
+    }
+
     private int contarNodosNoHojas(Node nodo) {
         if (nodo == null) {
             return 0;
@@ -232,10 +236,6 @@ public class LinkedBST<E extends Comparable<E>> implements BinarySearchTree<E>{
         }
         // Cuenta el nodo actual + los no hojas de subárboles
         return 1 + contarNodosNoHojas(nodo.left) + contarNodosNoHojas(nodo.right);
-    }
-
-    public int countNodes() {
-        return contarNodosNoHojas(root);
     }
 
     public int height(E x) {
