@@ -280,4 +280,25 @@ public class LinkedBST<E extends Comparable<E>> implements BinarySearchTree<E>{
         }
         return altura - 1; // Altura en número de aristas
     }
+
+    public int amplitude() {
+        int altura = height(root.data);
+        if (altura == -1) return 0; // árbol vacío o raíz nula
+
+        int maxAnchura = 0;
+        for (int nivel = 0; nivel <= altura; nivel++) {
+            int anchuraNivel = contarNodosEnNivel(root, nivel);
+            if (anchuraNivel > maxAnchura) {
+                maxAnchura = anchuraNivel;
+            }
+        }
+        return maxAnchura;
+    }
+
+    // Método auxiliar que cuenta nodos en un nivel específico, raíz nodo y nivel
+    private int contarNodosEnNivel(Node nodo, int nivel) {
+        if (nodo == null) return 0;
+        if (nivel == 0) return 1;
+        return contarNodosEnNivel(nodo.left, nivel - 1) + contarNodosEnNivel(nodo.right, nivel - 1);
+    }
 }
