@@ -283,7 +283,7 @@ public class LinkedBST<E extends Comparable<E>> implements BinarySearchTree<E>{
 
     public int amplitude() {
         int altura = height(root.data);
-        if (altura == -1) return 0; // árbol vacío o raíz nula
+        if (altura == -1) return 0;
 
         int maxAnchura = 0;
         for (int nivel = 0; nivel <= altura; nivel++) {
@@ -295,10 +295,41 @@ public class LinkedBST<E extends Comparable<E>> implements BinarySearchTree<E>{
         return maxAnchura;
     }
 
-    // Método auxiliar que cuenta nodos en un nivel específico, raíz nodo y nivel
     private int contarNodosEnNivel(Node nodo, int nivel) {
         if (nodo == null) return 0;
         if (nivel == 0) return 1;
         return contarNodosEnNivel(nodo.left, nivel - 1) + contarNodosEnNivel(nodo.right, nivel - 1);
     }
+
+    public int areaBST() throws Actividad1.ExceptionIsEmpty {
+    if (root == null) return 0;
+
+    int hojas = 0;
+    int altura = height(root.data);
+
+    QueueLink<Node> cola = new QueueLink<>();
+    cola.enqueue(root);
+
+    while (!cola.isEmpty()) {
+        Node actual = null;
+        try {
+            actual = cola.dequeue();
+        } catch (ExceptionIsEmpty e) {
+            // No debería ocurrir si controlamos isEmpty antes de dequeue
+            e.printStackTrace();
+        }
+
+        if (actual != null) {
+            if (actual.left == null && actual.right == null) {
+                hojas++;
+            }
+            if (actual.left != null) cola.enqueue(actual.left);
+            if (actual.right != null) cola.enqueue(actual.right);
+        }
+    }
+
+    return hojas * altura;
+}
+
+
 }
