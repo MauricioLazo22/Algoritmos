@@ -1,5 +1,6 @@
 package bstreelinklistinterfgeneric;
 import Exceptions.ItemDuplicated;
+import Exceptions.ItemNoFound;
 import bstreeInterface.BinarySearchTree;
 
 public class LinkedBST<E extends Comparable<E>> implements BinarySearchTree<E>{
@@ -51,6 +52,24 @@ public class LinkedBST<E extends Comparable<E>> implements BinarySearchTree<E>{
         } else {
             padre.right = new Node(data);
         }
+    }
+
+    public E search(E data) throws ItemNoFound {
+        Node actual = root;
+
+        while (actual != null) {
+            int comparacion = data.compareTo(actual.data);
+
+            if (comparacion == 0) {
+                return actual.data;
+            } else if (comparacion < 0) {
+                actual = actual.left;
+            } else {
+                actual = actual.right;
+            }
+        }
+
+        throw new ItemNoFound("El elemento no se encuentra en el árbol");
     }
 
 }
