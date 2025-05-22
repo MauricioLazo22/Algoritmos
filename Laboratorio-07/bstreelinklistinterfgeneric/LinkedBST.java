@@ -329,5 +329,19 @@ public class LinkedBST<E extends Comparable<E>> implements BinarySearchTree<E>{
         return hojas * altura;
     }
 
-    
+    public void drawBST() {
+        if (root == null) {
+            System.out.println("Árbol vacío");
+        } else {
+            drawBSTRec(root, "", true);
+        }
+    }
+
+    private void drawBSTRec(Node nodo, String prefijo, boolean esUltimo) {
+        if (nodo != null) {
+            System.out.println(prefijo + (esUltimo ? "└── " : "├── ") + nodo.data);
+            drawBSTRec(nodo.left, prefijo + (esUltimo ? "    " : "│   "), false);
+            drawBSTRec(nodo.right, prefijo + (esUltimo ? "    " : "│   "), true);
+        }
+    }
 }
