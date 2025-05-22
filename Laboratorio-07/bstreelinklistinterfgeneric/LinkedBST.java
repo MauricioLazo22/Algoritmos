@@ -22,7 +22,7 @@ public class LinkedBST<E extends Comparable<E>> implements BinarySearchTree<E>{
         }
     }
 
-    private Node root;
+    public Node root;
 
     public LinkedBST(){
         this.root = null;
@@ -153,7 +153,7 @@ public class LinkedBST<E extends Comparable<E>> implements BinarySearchTree<E>{
         return izquierda + centro + derecha;
     }
 
-    private void inOrder(Node nodo) {
+    public void inOrder(Node nodo) {
         if (nodo != null) {
             inOrder(nodo.left);
             System.out.println(nodo.data);
