@@ -344,4 +344,36 @@ public class LinkedBST<E extends Comparable<E>> implements BinarySearchTree<E>{
             drawBSTRec(nodo.right, prefijo + (esUltimo ? "    " : "│   "), true);
         }
     }
+
+    public void parenthesize() {
+        mostrarConParentesis(root, 0);
+    }
+
+    private void mostrarConParentesis(Node nodoActual, int nivel) {
+        if (nodoActual == null) {
+            return;
+        }
+
+        StringBuilder sangria = new StringBuilder();
+        for (int i = 0; i < nivel; i++) {
+            sangria.append("  ");
+        }
+
+        System.out.print(sangria.toString() + nodoActual.data);
+
+        boolean tieneHijos = nodoActual.left != null || nodoActual.right != null;
+
+        if (tieneHijos) {
+            System.out.println(" (");
+            mostrarConParentesis(nodoActual.left, nivel + 1);
+            mostrarConParentesis(nodoActual.right, nivel + 1);
+            System.out.print(sangria.toString() + ")");
+        }
+
+        if (nivel == 0) {
+            System.out.println();
+        } else {
+            System.out.println();
+        }
+    }
 }
