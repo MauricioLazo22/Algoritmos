@@ -1,7 +1,8 @@
 package bstreelinklistinterfgeneric;
+import Exceptions.ItemDuplicated;
 import bstreeInterface.BinarySearchTree;
 
-public class LinkedBST<E> implements BinarySearchTree<E>{
+public class LinkedBST<E extends Comparable<E>> implements BinarySearchTree<E>{
     class Node{
         public E data;
         public Node left;
@@ -23,4 +24,33 @@ public class LinkedBST<E> implements BinarySearchTree<E>{
     public LinkedBST(){
         this.root = null;
     }
+
+    public void insert(E data) throws ItemDuplicated {
+        if (root == null) {
+            root = new Node(data);
+            return;
+        }
+
+        Node actual = root;
+        Node padre = null;
+
+        while (actual != null) {
+            padre = actual;
+            int comparacion = data.compareTo(actual.data);
+            if (comparacion == 0) {
+                throw new ItemDuplicated("El elemento ya existe en el árbol");
+            } else if (comparacion < 0) {
+                actual = actual.left;
+            } else {
+                actual = actual.right;
+            }
+        }
+
+        if (data.compareTo(padre.data) < 0) {
+            padre.left = new Node(data);
+        } else {
+            padre.right = new Node(data);
+        }
+    }
+
 }
