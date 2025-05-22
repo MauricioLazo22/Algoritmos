@@ -176,4 +176,19 @@ public class LinkedBST<E extends Comparable<E>> implements BinarySearchTree<E>{
             System.out.println(nodo.data);
         }
     }
+
+    private E findMinNode(Node nodo) throws ItemNoFound {
+        if (nodo == null) {
+            throw new ItemNoFound("Subárbol vacío, no se puede encontrar el mínimo");
+        }
+
+        Node actual = nodo;
+        while (actual.left != null) {
+            actual = actual.left;
+        }
+
+        // Validar con search que el valor existe en el árbol completo
+        return search(actual.data);
+    }
+
 }
