@@ -212,5 +212,19 @@ public class LinkedBST<E extends Comparable<E>> implements BinarySearchTree<E>{
         root = null; // Al asignar null, el recolector de basura libera los nodos
     }
 
-    
+    public int countAllNodes() {
+        return contarNodosNoHojas(root);
+    }
+
+    private int contarNodosNoHojas(Node nodo) {
+        if (nodo == null) {
+            return 0;
+        }
+        // Si es hoja (no tiene hijos), no se cuenta
+        if (nodo.left == null && nodo.right == null) {
+            return 0;
+        }
+        // Cuenta el nodo actual + los no hojas de subárboles
+        return 1 + contarNodosNoHojas(nodo.left) + contarNodosNoHojas(nodo.right);
+    }
 }
