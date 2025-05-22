@@ -204,4 +204,13 @@ public class LinkedBST<E extends Comparable<E>> implements BinarySearchTree<E>{
         // Validar con search que el valor existe en el árbol completo
         return search(actual.data);
     }
+
+    public void destroyNodes() throws ExceptionIsEmpty {
+        if (isEmpty()) {
+            throw new ExceptionIsEmpty("El árbol está vacío, no hay nodos para eliminar");
+        }
+        root = null; // Al asignar null, el recolector de basura libera los nodos
+    }
+
+    
 }
