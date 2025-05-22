@@ -178,7 +178,7 @@ public class LinkedBST<E extends Comparable<E>> implements BinarySearchTree<E>{
         }
     }
 
-    private E findMinNode(Node nodo) throws ItemNoFound {
+    public E findMinNode(Node nodo) throws ItemNoFound {
         if (nodo == null) {
             throw new ItemNoFound("Subárbol vacío, no se puede encontrar el mínimo");
         }
@@ -192,7 +192,7 @@ public class LinkedBST<E extends Comparable<E>> implements BinarySearchTree<E>{
         return search(actual.data);
     }
 
-    private E findMaxNode(Node nodo) throws ItemNoFound {
+    public E findMaxNode(Node nodo) throws ItemNoFound {
         if (nodo == null) {
             throw new ItemNoFound("Subárbol vacío, no se puede encontrar el máximo");
         }
