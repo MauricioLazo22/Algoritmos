@@ -161,7 +161,7 @@ public class LinkedBST<E extends Comparable<E>> implements BinarySearchTree<E>{
         }
     }
 
-    private void preOrder(Node nodo) {
+    public void preOrder(Node nodo) {
         if (nodo != null) {
             System.out.println(nodo.data);
             preOrder(nodo.left);
@@ -169,7 +169,7 @@ public class LinkedBST<E extends Comparable<E>> implements BinarySearchTree<E>{
         }
     }
 
-    private void postOrder(Node nodo) {
+    public void postOrder(Node nodo) {
         if (nodo != null) {
             postOrder(nodo.left);
             postOrder(nodo.right);
