@@ -5,6 +5,7 @@ import Exceptions.ItemNoFound;
 import bstreeInterface.BinarySearchTree;
 
 public class LinkedBST<E extends Comparable<E>> implements BinarySearchTree<E>{
+    
     class Node{
         public E data;
         public Node left;
@@ -131,6 +132,21 @@ public class LinkedBST<E extends Comparable<E>> implements BinarySearchTree<E>{
             nodo = nodo.left;
         }
         return nodo;
+    }
+
+    @Override
+    public String toString() {
+        return recorrerInorden(root);
+    }
+
+    private String recorrerInorden(Node nodo) {
+        if (nodo == null) {
+            return "";
+        }
+        String izquierda = recorrerInorden(nodo.left);
+        String centro = nodo.data.toString() + " ";
+        String derecha = recorrerInorden(nodo.right);
+        return izquierda + centro + derecha;
     }
 
 }
