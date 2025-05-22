@@ -191,4 +191,17 @@ public class LinkedBST<E extends Comparable<E>> implements BinarySearchTree<E>{
         return search(actual.data);
     }
 
+    private E findMaxNode(Node nodo) throws ItemNoFound {
+        if (nodo == null) {
+            throw new ItemNoFound("Subárbol vacío, no se puede encontrar el máximo");
+        }
+
+        Node actual = nodo;
+        while (actual.right != null) {
+            actual = actual.right;
+        }
+
+        // Validar con search que el valor existe en el árbol completo
+        return search(actual.data);
+    }
 }
