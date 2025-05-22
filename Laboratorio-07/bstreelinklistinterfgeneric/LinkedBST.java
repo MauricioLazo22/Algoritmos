@@ -1,4 +1,5 @@
 package bstreelinklistinterfgeneric;
+import Exceptions.ExceptionIsEmpty;
 import Exceptions.ItemDuplicated;
 import Exceptions.ItemNoFound;
 import bstreeInterface.BinarySearchTree;
@@ -70,6 +71,66 @@ public class LinkedBST<E extends Comparable<E>> implements BinarySearchTree<E>{
         }
 
         throw new ItemNoFound("El elemento no se encuentra en el árbol");
+    }
+
+    public void delete(E data) throws ExceptionIsEmpty {
+        if (root == null) {
+            throw new ExceptionIsEmpty("El árbol está vacío, no se puede eliminar");
+        }
+
+        Node actual = root;
+        Node padre = null;
+
+        while (actual != null && data.compareTo(actual.data) != 0) {
+            padre = actual;
+            if (data.compareTo(actual.data) < 0) {
+                actual = actual.left;
+            } else {
+                actual = actual.right;
+            }
+        }
+
+        if (actual == null) {
+            return; // No se encontró el dato, no se hace nada
+        }
+
+        if (actual.left == null && actual.right == null) {
+            if (actual == root) {
+                root = null;
+            } else if (padre.left == actual) {
+                padre.left = null;
+            } else {
+                padre.right = null;
+            }
+        } else if (actual.left != null && actual.right == null) {
+            if (actual == root) {
+                root = actual.left;
+            } else if (padre.left == actual) {
+                padre.left = actual.left;
+            } else {
+                padre.right = actual.left;
+            }
+        } else if (actual.left == null && actual.right != null) {
+            if (actual == root) {
+                root = actual.right;
+            } else if (padre.left == actual) {
+                padre.left = actual.right;
+            } else {
+                padre.right = actual.right;
+            }
+        } else {
+            Node sucesor = obtenerMinimo(actual.right);
+            E datoSucesor = sucesor.data;
+            delete(datoSucesor);
+            actual.data = datoSucesor;
+        }
+    }
+
+    private Node obtenerMinimo(Node nodo) {
+        while (nodo.left != null) {
+            nodo = nodo.left;
+        }
+        return nodo;
     }
 
 }
