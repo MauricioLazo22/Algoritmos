@@ -5,7 +5,7 @@ import Exceptions.ItemNoFound;
 import bstreeInterface.BinarySearchTree;
 
 public class LinkedBST<E extends Comparable<E>> implements BinarySearchTree<E>{
-    
+
     class Node{
         public E data;
         public Node left;
@@ -132,6 +132,10 @@ public class LinkedBST<E extends Comparable<E>> implements BinarySearchTree<E>{
             nodo = nodo.left;
         }
         return nodo;
+    }
+
+    public boolean isEmpty() {
+        return root == null;
     }
 
     @Override
