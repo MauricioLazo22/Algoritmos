@@ -301,35 +301,33 @@ public class LinkedBST<E extends Comparable<E>> implements BinarySearchTree<E>{
         return contarNodosEnNivel(nodo.left, nivel - 1) + contarNodosEnNivel(nodo.right, nivel - 1);
     }
 
-    public int areaBST() throws Actividad1.ExceptionIsEmpty {
-    if (root == null) return 0;
+    public int areaBST() {
+        if (root == null) return 0;
 
-    int hojas = 0;
-    int altura = height(root.data);
+        int hojas = 0;
+        int altura = height(root.data);
 
-    QueueLink<Node> cola = new QueueLink<>();
-    cola.enqueue(root);
+        QueueLink<Node> cola = new QueueLink<>();
+        cola.enqueue(root);
 
-    while (!cola.isEmpty()) {
-        Node actual = null;
-        try {
-            actual = cola.dequeue();
-        } catch (ExceptionIsEmpty e) {
-            // No debería ocurrir si controlamos isEmpty antes de dequeue
-            e.printStackTrace();
-        }
+        while (!cola.isEmpty()) {
+            Node actual = null;
+            try {
+                actual = cola.dequeue();
+            } catch (Actividad1.ExceptionIsEmpty e) {
+                // No debería ocurrir, ya que controlamos isEmpty antes
+                return 0; // o puedes lanzar RuntimeException si prefieres
+            }
 
-        if (actual != null) {
             if (actual.left == null && actual.right == null) {
                 hojas++;
             }
             if (actual.left != null) cola.enqueue(actual.left);
             if (actual.right != null) cola.enqueue(actual.right);
         }
+
+        return hojas * altura;
     }
 
-    return hojas * altura;
-}
-
-
+    
 }
