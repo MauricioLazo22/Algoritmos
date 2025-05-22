@@ -1,4 +1,5 @@
 package bstreelinklistinterfgeneric;
+import Actividad2.QueueLink;
 import Exceptions.ExceptionIsEmpty;
 import Exceptions.ItemDuplicated;
 import Exceptions.ItemNoFound;
@@ -221,7 +222,6 @@ public class LinkedBST<E extends Comparable<E>> implements BinarySearchTree<E>{
         return 1 + contarTodos(nodo.left) + contarTodos(nodo.right);
     }
 
-
     private int contarNodosNoHojas(Node nodo) {
         if (nodo == null) {
             return 0;
@@ -238,4 +238,46 @@ public class LinkedBST<E extends Comparable<E>> implements BinarySearchTree<E>{
         return contarNodosNoHojas(root);
     }
 
+    public int height(E x) {
+        // Buscar el nodo que contiene el dato x
+        Node nodo = root;
+        while (nodo != null) {
+            int cmp = ((Comparable<? super E>) x).compareTo(nodo.data);
+            if (cmp == 0) {
+                break;
+            } else if (cmp < 0) {
+                nodo = nodo.left;
+            } else {
+                nodo = nodo.right;
+            }
+        }
+        // Si no se encontró el nodo, retornar -1
+        if (nodo == null) return -1;
+
+        // Calcular altura iterativa desde el nodo encontrado
+        return calcularAlturaIterativa(nodo);
+    }
+
+    private int calcularAlturaIterativa(Node nodoRaiz) {
+        if (nodoRaiz == null) return 0;
+
+        QueueLink<Node> cola = new QueueLink<>();
+        cola.enqueue(nodoRaiz);
+        int altura = 0;
+
+        while (!cola.isEmpty()) {
+            int tamañoNivel = cola.size(); // Método size() que debes agregar en QueueLink
+            for (int i = 0; i < tamañoNivel; i++) {
+                try {
+                    Node actual = cola.dequeue();
+                    if (actual.left != null) cola.enqueue(actual.left);
+                    if (actual.right != null) cola.enqueue(actual.right);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            altura++;
+        }
+        return altura - 1; // Altura en número de aristas
+    }
 }

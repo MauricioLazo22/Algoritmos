@@ -47,6 +47,16 @@ public class QueueLink<E> implements Queue<E> {
 		}
     }
 
+    public int size() {
+        int contador = 0;
+        Node<E> actual = first;
+        while (actual != null) {
+            contador++;
+            actual = actual.getNext();
+        }
+        return contador;
+    }
+
     public boolean isEmpty() {
         return first == null;
     }
