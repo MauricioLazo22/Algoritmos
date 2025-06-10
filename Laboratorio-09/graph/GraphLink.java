@@ -73,6 +73,19 @@ public class GraphLink<E> {
         }
     }
 
+    public void removeEdge(E v, E z) {
+        for (Vertex<E> vertex : listVertex) {
+            if (vertex.getData().equals(v)) {
+                for (Edge<E> edge : vertex.listAdj) {
+                    if (edge.getData().equals(z)) {
+                        vertex.listAdj.remove(edge);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
     public String toString() {
         return this.listVertex.toString();
     }
