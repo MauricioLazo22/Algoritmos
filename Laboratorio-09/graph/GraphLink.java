@@ -8,7 +8,8 @@ public class GraphLink<E> {
     }
 
     public void insertVertex(E data) {
-        
+        Vertex<E> newVertex = new Vertex<>(data);
+        listVertex.insert(newVertex);
     }
 
     public void insertEdge(E verOri, E verDes) {
