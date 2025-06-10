@@ -180,6 +180,24 @@ public class GraphLink<E> {
         return path;
     }
 
+    public void insertEdgeWeight(E v, E z, int w) {
+        Vertex<E> vertexV = null;
+        Vertex<E> vertexZ = null;
+
+        for (Vertex<E> vertex : listVertex) {
+            if (vertex.getData().equals(v)) {
+                vertexV = vertex;
+            }
+            if (vertex.getData().equals(z)) {
+                vertexZ = vertex;
+            }
+        }
+
+        if (vertexV != null && vertexZ != null) {
+            Edge<E> edge = new Edge<>(vertexZ, w);
+            vertexV.listAdj.insert(edge);
+        }
+    }
     public String toString() {
         return this.listVertex.toString();
     }
