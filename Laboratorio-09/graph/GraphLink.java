@@ -33,6 +33,14 @@ public class GraphLink<E> {
         }
     }
 
+    public boolean searchVertex(E v) {
+        for (Vertex<E> vertex : listVertex) {
+            if (vertex.getData().equals(v)) {
+                return true;
+            }
+        }
+        return false;
+    }
     public String toString() {
         return this.listVertex.toString();
     }
