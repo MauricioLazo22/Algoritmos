@@ -55,6 +55,24 @@ public class GraphLink<E> {
         return false;
     }
 
+    public void removeVertex(E v) {
+        for (Vertex<E> vertex : listVertex) {
+            for (Edge<E> edge : vertex.listAdj) {
+                if (edge.getData().equals(v)) {
+                    vertex.listAdj.remove(edge);
+                    break;
+                }
+            }
+        }
+
+        for (Vertex<E> vertex : listVertex) {
+            if (vertex.getData().equals(v)) {
+                listVertex.remove(vertex);
+                break;
+            }
+        }
+    }
+
     public String toString() {
         return this.listVertex.toString();
     }
