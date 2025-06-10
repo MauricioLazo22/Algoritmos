@@ -41,6 +41,20 @@ public class GraphLink<E> {
         }
         return false;
     }
+
+    public boolean searchEdge(E v, E z) {
+        for (Vertex<E> vertex : listVertex) {
+            if (vertex.getData().equals(v)) {
+                for (Edge<E> edge : vertex.listAdj) {
+                    if (edge.getData().equals(z)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     public String toString() {
         return this.listVertex.toString();
     }
