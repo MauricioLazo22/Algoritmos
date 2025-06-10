@@ -3,6 +3,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GraphLink<E> {
     protected ListLinked<Vertex<E>> listVertex;
@@ -138,7 +141,45 @@ public class GraphLink<E> {
             }
         }
     }
-    
+
+    public ArrayList<Vertex<E>> bfsPath(E v, E z) {
+        Set<Vertex<E>> visited = new HashSet<>();
+        Queue<Vertex<E>> queue = new LinkedList<>();
+        Map<Vertex<E>, Vertex<E>> previous = new HashMap<>();
+        ArrayList<Vertex<E>> path = new ArrayList<>();
+
+        for (Vertex<E> vertex : listVertex) {
+            if (vertex.getData().equals(v)) {
+                queue.add(vertex);
+                visited.add(vertex);
+
+                while (!queue.isEmpty()) {
+                    Vertex<E> current = queue.poll();
+
+                    if (current.getData().equals(z)) {
+                        Vertex<E> temp = current;
+                        while (temp != null) {
+                            path.add(0, temp);
+                            temp = previous.get(temp);
+                        }
+                        return path;
+                    }
+
+                    for (Edge<E> edge : current.listAdj) {
+                        Vertex<E> neighbor = edge.getRefDest();
+
+                        if (!visited.contains(neighbor)) {
+                            queue.add(neighbor);
+                            visited.add(neighbor);
+                            previous.put(neighbor, current);
+                        }
+                    }
+                }
+            }
+        }
+        return path;
+    }
+
     public String toString() {
         return this.listVertex.toString();
     }
