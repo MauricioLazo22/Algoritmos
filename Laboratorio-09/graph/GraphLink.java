@@ -1,4 +1,6 @@
 package Laboratorio-09.graph;
+import java.util.HashSet;
+import java.util.Set;
 
 public class GraphLink<E> {
     protected ListLinked<Vertex<E>> listVertex;
@@ -82,6 +84,27 @@ public class GraphLink<E> {
                         break;
                     }
                 }
+            }
+        }
+    }
+
+    public void dfs(E v) {
+        Set<Vertex<E>> visited = new HashSet<>();
+        dfsRecursive(v, visited);
+    }
+
+    private void dfsRecursive(E v, Set<Vertex<E>> visited) {
+        for (Vertex<E> vertex : listVertex) {
+            if (vertex.getData().equals(v)) {
+                if (!visited.contains(vertex)) {
+                    System.out.println(vertex.getData());
+                    visited.add(vertex);
+                    
+                    for (Edge<E> edge : vertex.listAdj) {
+                        dfsRecursive(edge.getData(), visited);
+                    }
+                }
+                break;
             }
         }
     }
