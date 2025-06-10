@@ -1,4 +1,6 @@
 package Laboratorio-09.graph;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -109,6 +111,34 @@ public class GraphLink<E> {
         }
     }
 
+    public void bfs(E v) {
+        Set<Vertex<E>> visited = new HashSet<>();
+        Queue<Vertex<E>> queue = new LinkedList<>();
+
+        for (Vertex<E> vertex : listVertex) {
+            if (vertex.getData().equals(v)) {
+                queue.add(vertex);
+                visited.add(vertex);
+                System.out.println(vertex.getData());
+
+                while (!queue.isEmpty()) {
+                    Vertex<E> current = queue.poll();
+
+                    for (Edge<E> edge : current.listAdj) {
+                        Vertex<E> neighbor = edge.getRefDest();
+
+                        if (!visited.contains(neighbor)) {
+                            queue.add(neighbor);
+                            visited.add(neighbor);
+                            System.out.println(neighbor.getData());
+                        }
+                    }
+                }
+                break;
+            }
+        }
+    }
+    
     public String toString() {
         return this.listVertex.toString();
     }
