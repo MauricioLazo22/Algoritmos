@@ -1,6 +1,6 @@
 package Laboratorio-09.graph;
 
-public class Vertex {
+public class Vertex<E> {
     private E data;
     protected ListLinked<Edge<E>> listAdj;
 
