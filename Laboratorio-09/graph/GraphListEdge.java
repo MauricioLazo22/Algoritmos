@@ -490,9 +490,25 @@ public class GraphListEdge<V,E> {
     }
 
     public boolean esPlano() {
-        int n = listVertexSize();          // número de vértices
+       int n = listVertexSize();          // número de vértices
         if (n <= 4) return true;           // todo grafo con ≤4 vértices es plano
         int e = undirectedEdgeCount();     // número de aristas sin duplicar
         return e <= 3 * n - 6;             // cota de planaridad de Euler
+    } 
+
+    private int undirectedEdgeCount() {
+        Set<String> pares = new HashSet<>();
+        for (Vertex<E> v : listVertex) {
+            for (Edge<E> e : v.listAdj) {
+                Vertex<E> w = e.getRefDest();
+                // clave conmutativa basada en identityHashCode para evitar colisiones
+                String key = System.identityHashCode(v) < System.identityHashCode(w)
+                        ? v.getData() + "|" + w.getData()
+                        : w.getData() + "|" + v.getData();
+                pares.add(key);
+            }
+        }
+        return pares.size();
     }
+    
 }
