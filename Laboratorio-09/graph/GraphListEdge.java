@@ -364,5 +364,14 @@ public class GraphListEdge<V,E> {
         return true;
     }
 
+    public boolean esCompletoDirigido() {
+        int n = listVertex.size();
+        for (Vertex<E> vert : listVertex) {
+            if (vert.listAdj.size() != n - 1 || inDegree(vert.getData()) != n - 1) {
+                return false;
+            }
+        }
+        return true;
+    }
     
 }
