@@ -54,5 +54,17 @@ public class GraphListEdge<V,E> {
         }
         return false;
     }
+
+    public boolean searchEdge(V v, V z) {
+        for (EdgeObj<V,E> edge : secEdge) {
+            V a = edge.endVertex1.info;
+            V b = edge.endVertex2.info;
+            if ((a.equals(v) && b.equals(z)) || (a.equals(z) && b.equals(v))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     
 }
