@@ -331,5 +331,15 @@ public class GraphListEdge<V,E> {
         return origen == 1 && sumidero == 1;
     }
 
+    public boolean esCicloDirigido() {
+        if (!isUnderlyingConnected() || listVertex.size() < 2) return false;
+        for (Vertex<E> vert : listVertex) {
+            if (vert.listAdj.size() != 1 || inDegree(vert.getData()) != 1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     
 }
