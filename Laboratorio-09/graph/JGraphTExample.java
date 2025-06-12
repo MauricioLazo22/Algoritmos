@@ -30,5 +30,20 @@ public class JGraphTExample {
         custom.insertEdge("C", "D");
         custom.insertEdge("D", "E");
         custom.insertEdge("B", "C");
+        
+        // 2. Convertimos a un grafo no dirigido de JGraphT
+        Graph<String, DefaultEdge> graph =
+                new DefaultUndirectedGraph<>(DefaultEdge.class);
+
+        // Añadimos vértices
+        for (VertexObj<String, String> vObj : custom.secVertex) {
+            graph.addVertex(vObj.info);
+        }
+        // Añadimos aristas
+        for (EdgeObj<String, String> eObj : custom.secEdge) {
+            String u = eObj.endVertex1.info;
+            String w = eObj.endVertex2.info;
+            graph.addEdge(u, w);
+        }
     }
 }
