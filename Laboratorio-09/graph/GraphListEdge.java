@@ -201,5 +201,11 @@ public class GraphListEdge<V,E> {
         return visited.size() == others.size();
     }
 
-    
+    public boolean esCompleto() {
+        int n = secVertex.size();
+        for (VertexObj<V,E> v : secVertex) {
+            if (grado(v.info) != n - 1) return false;
+        }
+        return true;
+    }
 }
