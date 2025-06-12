@@ -266,4 +266,15 @@ public class GraphListEdge<V,E> {
         }
         return matriz;
     }
+
+    public int outDegree(E v) {
+        for (Vertex<E> vert : listVertex) {
+            if (vert.getData().equals(v)) {
+                return vert.listAdj.size();
+            }
+        }
+        return 0;
+    }
+
+    
 }
