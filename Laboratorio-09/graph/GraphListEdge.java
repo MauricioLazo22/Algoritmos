@@ -233,5 +233,21 @@ public class GraphListEdge<V,E> {
         return sb.toString();
     }
 
+    public Map<V, List<V>> listaAdyacencias() {
+        Map<V, List<V>> adj = new LinkedHashMap<>();
+        // Inicializar lista vacía para cada vértice
+        for (VertexObj<V,E> v : secVertex) {
+            adj.put(v.info, new ArrayList<>());
+        }
+        // Rellenar con vecinos
+        for (EdgeObj<V,E> e : secEdge) {
+            V u = e.endVertex1.info;
+            V w = e.endVertex2.info;
+            adj.get(u).add(w);
+            adj.get(w).add(u);
+        }
+        return adj;
+    }
+
     
 }
