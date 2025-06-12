@@ -198,6 +198,76 @@ public class GraphLink<E> {
             vertexV.listAdj.insert(edge);
         }
     }
+
+    public ArrayList<Vertex<E>> shortPath(E sourceData, E targetData) {
+        Vertex<E> source = null, target = null;
+        for (Vertex<E> v : listVertex) {
+            if (v.getData().equals(sourceData)) {
+                source = v;
+            }
+            if (v.getData().equals(targetData)) {
+                target = v;
+            }
+        }
+        if (source == null || target == null) {
+            return new ArrayList<>();
+        }
+
+        Map<Vertex<E>, Integer> dist = new HashMap<>();
+        Map<Vertex<E>, Vertex<E>> prev = new HashMap<>();
+        for (Vertex<E> v : listVertex) {
+            dist.put(v, Integer.MAX_VALUE);
+        }
+        dist.put(source, 0);
+
+        // Recopilar todas las aristas del grafo
+        class EdgeInfo {
+            Vertex<E> u;
+            Vertex<E> v;
+            int w;
+            EdgeInfo(Vertex<E> u, Vertex<E> v, int w) {
+                this.u = u;
+                this.v = v;
+                this.w = w;
+            }
+        }
+        ArrayList<EdgeInfo> edges = new ArrayList<>();
+        for (Vertex<E> u : listVertex) {
+            for (Edge<E> e : u.listAdj) {
+                edges.add(new EdgeInfo(u, e.getRefDest(), e.getWeight()));
+            }
+        }
+
+        int V = dist.size();
+        // Relajar aristas V-1 veces
+        for (int i = 1; i < V; i++) {
+            for (EdgeInfo ei : edges) {
+                if (dist.get(ei.u) != Integer.MAX_VALUE && dist.get(ei.u) + ei.w < dist.get(ei.v)) {
+                    dist.put(ei.v, dist.get(ei.u) + ei.w);
+                    prev.put(ei.v, ei.u);
+                }
+            }
+        }
+
+        // Comprobar ciclos negativos
+        for (EdgeInfo ei : edges) {
+            if (dist.get(ei.u) != Integer.MAX_VALUE && dist.get(ei.u) + ei.w < dist.get(ei.v)) {
+                return new ArrayList<>();
+            }
+        }
+
+        // Reconstruir la ruta desde target hasta source
+        ArrayList<Vertex<E>> path = new ArrayList<>();
+        for (Vertex<E> at = target; at != null; at = prev.get(at)) {
+            path.add(0, at);
+        }
+        // Verificar que la ruta empieza en el origen
+        if (path.isEmpty() || !path.get(0).equals(source)) {
+            return new ArrayList<>();
+        }
+        return path;
+    }
+    
     public String toString() {
         return this.listVertex.toString();
     }
