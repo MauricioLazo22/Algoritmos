@@ -163,5 +163,43 @@ public class GraphListEdge<V,E> {
         return true;
     }
 
+    public boolean esRueda() {
+        int n = secVertex.size();
+        if (!isConnected() || n < 4) return false;
+        VertexObj<V,E> centro = null;
+        int centros = 0;
+        for (VertexObj<V,E> v : secVertex) {
+            int d = grado(v.info);
+            if (d == n - 1) {
+                centro = v;
+                centros++;
+            } else if (d != 3) {
+                return false;
+            }
+        }
+        if (centros != 1) return false;
+        // Verificar que al excluir el centro, los demás formen un ciclo
+        Set<VertexObj<V,E>> others = new HashSet<>(secVertex);
+        others.remove(centro);
+        Set<VertexObj<V,E>> visited = new HashSet<>();
+        Queue<VertexObj<V,E>> queue = new LinkedList<>();
+        VertexObj<V,E> start = others.iterator().next();
+        visited.add(start);
+        queue.add(start);
+        while (!queue.isEmpty()) {
+            VertexObj<V,E> curr = queue.poll();
+            for (EdgeObj<V,E> e : secEdge) {
+                VertexObj<V,E> neigh = null;
+                if (e.endVertex1 == curr && !others.contains(e.endVertex2)) continue;
+                if (e.endVertex1 == curr) neigh = e.endVertex2;
+                else if (e.endVertex2 == curr) neigh = e.endVertex1;
+                if (neigh != null && others.contains(neigh) && visited.add(neigh)) {
+                    queue.add(neigh);
+                }
+            }
+        }
+        return visited.size() == others.size();
+    }
+
     
 }
