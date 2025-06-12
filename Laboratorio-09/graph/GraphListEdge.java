@@ -540,4 +540,23 @@ public class GraphListEdge<V,E> {
         }
         return visitados.size() == listVertexSize();
     }
+
+    public boolean esAutoComplementario() {
+        // 1. Construir el grafo complemento
+        GraphLink<E> complemento = new GraphLink<>();
+        // duplicar vértices
+        for (Vertex<E> v : listVertex) {
+            complemento.insertVertex(v.getData());
+        }
+        // añadir aristas faltantes
+        for (Vertex<E> u : listVertex) {
+            for (Vertex<E> v : listVertex) {
+                if (!u.equals(v) && !searchEdge(u.getData(), v.getData())) {
+                    complemento.insertEdge(u.getData(), v.getData());
+                }
+            }
+        }
+        // 2. Verificar isomorfismo con el grafo original
+        return esIsomorfo(complemento);
+    }
 }
