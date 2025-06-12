@@ -341,5 +341,28 @@ public class GraphListEdge<V,E> {
         return true;
     }
 
+    public boolean esRuedaDirigido() {
+        int n = listVertex.size();
+        if (!isUnderlyingConnected() || n < 4) return false;
+        Vertex<E> centro = null;
+        int centros = 0;
+        for (Vertex<E> vert : listVertex) {
+            int out = vert.listAdj.size(), in = inDegree(vert.getData());
+            if (out == n - 1 && in == 0) {
+                centro = vert;
+                centros++;
+            }
+        }
+        if (centros != 1) return false;
+        // Verificar ciclo dirigido en periféricos
+        for (Vertex<E> vert : listVertex) {
+            if (vert == centro) continue;
+            if (vert.listAdj.size() != 1 || inDegree(vert.getData()) != 1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     
 }
