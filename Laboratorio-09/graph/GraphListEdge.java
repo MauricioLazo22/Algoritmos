@@ -288,5 +288,9 @@ public class GraphListEdge<V,E> {
         return count;
     }
 
+    public int grado(E v) {
+        return inDegree(v) + outDegree(v);
+    }
+
     
 }
