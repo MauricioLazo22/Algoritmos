@@ -58,5 +58,13 @@ public class JGraphTExample {
             System.out.print(bfsIter.next() + " ");
         }
         System.out.println();
+
+        // 5. Conectividad y componentes
+        ConnectivityInspector<String, DefaultEdge> ci =
+                new ConnectivityInspector<>(graph);
+        System.out.println("¿Grafo conectado? " + ci.isConnected());
+        System.out.println("Componentes conectados: " + ci.connectedSets());
+
+        
     }
 }
