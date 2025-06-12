@@ -50,6 +50,13 @@ public class JGraphTExample {
         System.out.println("Vértices JGraphT: " + graph.vertexSet());
         System.out.println("Aristas JGraphT: " + graph.edgeSet());
 
-        
+        // 4. Recorrido BFS usando BreadthFirstIterator
+        System.out.print("BFS desde A: ");
+        BreadthFirstIterator<String, DefaultEdge> bfsIter =
+                new BreadthFirstIterator<>(graph, "A");
+        while (bfsIter.hasNext()) {
+            System.out.print(bfsIter.next() + " ");
+        }
+        System.out.println();
     }
 }
