@@ -208,4 +208,30 @@ public class GraphListEdge<V,E> {
         }
         return true;
     }
+
+    public String representacionFormal() {
+        StringBuilder sb = new StringBuilder();
+        // Vértices
+        sb.append("V = {");
+        for (int i = 0; i < secVertex.size(); i++) {
+            sb.append(secVertex.get(i).info);
+            if (i < secVertex.size() - 1) sb.append(", ");
+        }
+        sb.append("}\n");
+        // Aristas
+        sb.append("E = {");
+        for (int i = 0; i < secEdge.size(); i++) {
+            EdgeObj<V,E> e = secEdge.get(i);
+            sb.append("{")
+            .append(e.endVertex1.info)
+            .append(",")
+            .append(e.endVertex2.info)
+            .append("}");
+            if (i < secEdge.size() - 1) sb.append(", ");
+        }
+        sb.append("}");
+        return sb.toString();
+    }
+
+    
 }
