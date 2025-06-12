@@ -373,5 +373,19 @@ public class GraphListEdge<V,E> {
         }
         return true;
     }
+
+    public static <V> GraphListEdge<V, Void> fromFormal(Collection<V> vertices, Collection<V[]> edges) {
+        GraphListEdge<V, Void> g = new GraphListEdge<>();
+        for (V v : vertices) {
+            g.insertVertex(v);
+        }
+        for (V[] e : edges) {
+            if (e != null && e.length == 2) {
+                g.insertEdge(e[0], e[1]);
+            }
+        }
+        return g;
+    }
+
     
 }
