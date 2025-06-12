@@ -488,4 +488,11 @@ public class GraphListEdge<V,E> {
         for (Vertex<E> v : listVertex) c += v.listAdj.size();
         return c;
     }
+
+    public boolean esPlano() {
+        int n = listVertexSize();          // número de vértices
+        if (n <= 4) return true;           // todo grafo con ≤4 vértices es plano
+        int e = undirectedEdgeCount();     // número de aristas sin duplicar
+        return e <= 3 * n - 6;             // cota de planaridad de Euler
+    }
 }
