@@ -403,5 +403,21 @@ public class GraphListEdge<V,E> {
         return g;
     }
 
-    
+    public static <V> GraphListEdge<V, Void> fromAdjacencyMatrix(V[] vertices,int[][] matrix) {
+        GraphListEdge<V, Void> g = new GraphListEdge<>();
+        // insertar vértices
+        for (V v : vertices) {
+            g.insertVertex(v);
+        }
+        // insertar aristas
+        int n = vertices.length;
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {      // i < j evita duplicar
+                if (matrix[i][j] == 1) {
+                    g.insertEdge(vertices[i], vertices[j]);
+                }
+            }
+        }
+        return g;
+    }
 }
