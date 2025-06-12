@@ -66,5 +66,43 @@ public class GraphListEdge<V,E> {
         return false;
     }
 
-    
+    public void bfs(V v) {
+        // Buscar el vértice de inicio
+        VertexObj<V,E> start = null;
+        for (VertexObj<V,E> vertex : secVertex) {
+            if (vertex.info.equals(v)) {
+                start = vertex;
+                break;
+            }
+        }
+        if (start == null) return;
+
+        // Conjuntos y cola para BFS
+        Set<VertexObj<V,E>> visited = new HashSet<>();
+        Queue<VertexObj<V,E>> queue = new LinkedList<>();
+
+        // Inicialización
+        visited.add(start);
+        queue.add(start);
+
+        // Proceso BFS
+        while (!queue.isEmpty()) {
+            VertexObj<V,E> current = queue.poll();
+            System.out.println(current.info);
+
+            // Explorar vecinos a través de secEdge
+            for (EdgeObj<V,E> edge : secEdge) {
+                VertexObj<V,E> neighbor = null;
+                if (edge.endVertex1 == current) {
+                    neighbor = edge.endVertex2;
+                } else if (edge.endVertex2 == current) {
+                    neighbor = edge.endVertex1;
+                }
+                if (neighbor != null && !visited.contains(neighbor)) {
+                    visited.add(neighbor);
+                    queue.add(neighbor);
+                }
+            }
+        }
+    }
 }
