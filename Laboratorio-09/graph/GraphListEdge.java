@@ -510,5 +510,34 @@ public class GraphListEdge<V,E> {
         }
         return pares.size();
     }
-    
+
+    public boolean esConexoDirigido() {
+        if (listVertexSize() == 0) return true;          // grafo vacío → conexo
+
+        Set<Vertex<E>> visitados = new HashSet<>();
+        Queue<Vertex<E>> cola = new LinkedList<>();
+
+        Vertex<E> inicio = listVertex.iterator().next();
+        visitados.add(inicio);
+        cola.add(inicio);
+
+        while (!cola.isEmpty()) {
+            Vertex<E> actual = cola.poll();
+
+            // Aristas salientes
+            for (Edge<E> e : actual.listAdj) {
+                Vertex<E> vecino = e.getRefDest();
+                if (visitados.add(vecino)) cola.add(vecino);
+            }
+            // Aristas entrantes (tratamos el grafo como no dirigido)
+            for (Vertex<E> v : listVertex) {
+                for (Edge<E> e : v.listAdj) {
+                    if (e.getRefDest() == actual && visitados.add(v)) {
+                        cola.add(v);
+                    }
+                }
+            }
+        }
+        return visitados.size() == listVertexSize();
+    }
 }
