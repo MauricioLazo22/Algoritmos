@@ -292,5 +292,29 @@ public class GraphListEdge<V,E> {
         return inDegree(v) + outDegree(v);
     }
 
-    
+    private boolean isUnderlyingConnected() {
+        if (listVertex.isEmpty()) return true;
+        Set<Vertex<E>> visited = new HashSet<>();
+        Queue<Vertex<E>> queue = new LinkedList<>();
+        Vertex<E> start = listVertex.get(0);
+        visited.add(start);
+        queue.add(start);
+        while (!queue.isEmpty()) {
+            Vertex<E> curr = queue.poll();
+            // explorar salientes
+            for (Edge<E> e : curr.listAdj) {
+                Vertex<E> nei = e.getRefDest();
+                if (visited.add(nei)) queue.add(nei);
+            }
+            // explorar entrantes
+            for (Vertex<E> vert : listVertex) {
+                for (Edge<E> e : vert.listAdj) {
+                    if (e.getRefDest() == curr && visited.add(vert)) {
+                        queue.add(vert);
+                    }
+                }
+            }
+        }
+        return visited.size() == listVertex.size();
+    }
 }
