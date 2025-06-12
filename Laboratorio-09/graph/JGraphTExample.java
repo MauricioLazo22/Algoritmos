@@ -79,6 +79,11 @@ public class JGraphTExample {
         var path = dijkstra.getPath("A", "E");
         System.out.println("Ruta más corta A→E: " + path.getVertexList());
         System.out.println("Distancia (aristas): " + path.getLength());
-        
+
+        // 8. Árbol de expansión mínima (Kruskal) (Para grafos no dirigidos por defecto)
+        KruskalMinimumSpanningTree<String, DefaultEdge> kruskal =
+                new KruskalMinimumSpanningTree<>(graph);
+        System.out.println("MST (aristas): " +
+                kruskal.getSpanningTree().getEdges());
     }
 }
