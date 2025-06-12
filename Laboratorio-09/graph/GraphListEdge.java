@@ -155,5 +155,13 @@ public class GraphListEdge<V,E> {
         return extremos == 2;
     }
 
+    public boolean esCiclo() {
+        if (!isConnected() || secVertex.size() < 3) return false;
+        for (VertexObj<V,E> v : secVertex) {
+            if (grado(v.info) != 2) return false;
+        }
+        return true;
+    }
+
     
 }
