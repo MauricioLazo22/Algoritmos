@@ -249,5 +249,21 @@ public class GraphListEdge<V,E> {
         return adj;
     }
 
-    
+    public int[][] matrizAdyacencia() {
+        int n = secVertex.size();
+        int[][] matriz = new int[n][n];
+        // Mapa de índice por vértice
+        Map<V, Integer> idx = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            idx.put(secVertex.get(i).info, i);
+        }
+        // Marcar 1 donde exista arista
+        for (EdgeObj<V,E> e : secEdge) {
+            int i = idx.get(e.endVertex1.info);
+            int j = idx.get(e.endVertex2.info);
+            matriz[i][j] = 1;
+            matriz[j][i] = 1; // grafo no dirigido
+        }
+        return matriz;
+    }
 }
