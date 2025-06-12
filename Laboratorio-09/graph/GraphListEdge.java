@@ -45,4 +45,14 @@ public class GraphListEdge<V,E> {
         EdgeObj<V,E> newEdge = new EdgeObj<>(vert1, vert2, null, secEdge.size());
         secEdge.add(newEdge);
     }
+
+    public boolean searchVertex(V info) {
+        for (VertexObj<V, E> vertex : secVertex) {
+            if (vertex.info.equals(info)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
 }
