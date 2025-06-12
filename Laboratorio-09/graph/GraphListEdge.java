@@ -144,5 +144,16 @@ public class GraphListEdge<V,E> {
         return visited.size() == secVertex.size();
     }
 
+    public boolean esCamino() {
+        if (!isConnected() || secVertex.size() < 2) return false;
+        int extremos = 0;
+        for (VertexObj<V,E> v : secVertex) {
+            int d = grado(v.info);
+            if (d == 1) extremos++;
+            else if (d != 2) return false;
+        }
+        return extremos == 2;
+    }
+
     
 }
