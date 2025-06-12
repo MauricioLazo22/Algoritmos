@@ -72,5 +72,13 @@ public class JGraphTExample {
         if (cd.detectCycles()) {
             System.out.println("Vértices en algún ciclo: " + cd.findCycles());
         }
+
+        // 7. Camino más corto (Dijkstra)
+        DijkstraShortestPath<String, DefaultEdge> dijkstra =
+                new DijkstraShortestPath<>(graph);
+        var path = dijkstra.getPath("A", "E");
+        System.out.println("Ruta más corta A→E: " + path.getVertexList());
+        System.out.println("Distancia (aristas): " + path.getLength());
+        
     }
 }
