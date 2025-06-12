@@ -317,4 +317,19 @@ public class GraphListEdge<V,E> {
         }
         return visited.size() == listVertex.size();
     }
+
+    public boolean esCaminoDirigido() {
+        if (!isUnderlyingConnected() || listVertex.size() < 2) return false;
+        int origen = 0, sumidero = 0;
+        for (Vertex<E> vert : listVertex) {
+            int out = vert.listAdj.size();
+            int in = inDegree(vert.getData());
+            if (out - in == 1) origen++;
+            else if (in - out == 1) sumidero++;
+            else if (in != out) return false;
+        }
+        return origen == 1 && sumidero == 1;
+    }
+
+    
 }
