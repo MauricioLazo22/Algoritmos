@@ -387,5 +387,21 @@ public class GraphListEdge<V,E> {
         return g;
     }
 
+    public static <V> GraphListEdge<V, Void> fromAdjacencyList(Map<V, ? extends Collection<V>> adj) {
+        GraphListEdge<V, Void> g = new GraphListEdge<>();
+        // añadir vértices
+        for (V v : adj.keySet()) {
+            g.insertVertex(v);
+        }
+        // añadir aristas evitando duplicados (insertEdge ya verifica)
+        for (Map.Entry<V, ? extends Collection<V>> entry : adj.entrySet()) {
+            V u = entry.getKey();
+            for (V w : entry.getValue()) {
+                g.insertEdge(u, w);
+            }
+        }
+        return g;
+    }
+
     
 }
