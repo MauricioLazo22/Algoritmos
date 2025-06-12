@@ -85,5 +85,13 @@ public class JGraphTExample {
                 new KruskalMinimumSpanningTree<>(graph);
         System.out.println("MST (aristas): " +
                 kruskal.getSpanningTree().getEdges());
+
+        // 9. Coloreado voraz de vértices
+        GreedyColoring<String, DefaultEdge> coloring =
+                new GreedyColoring<>(graph);
+        System.out.println("Número de colores usados: " +
+                coloring.getColoring().getNumberColors());
+        System.out.println("Asignación de colores: " +
+                coloring.getColoring().getColors());
     }
 }
