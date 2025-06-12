@@ -124,5 +124,25 @@ public class GraphListEdge<V,E> {
         return grado;
     }
 
+    private boolean isConnected() {
+        if (secVertex.isEmpty()) return true;
+        Set<VertexObj<V,E>> visited = new HashSet<>();
+        Queue<VertexObj<V,E>> queue = new LinkedList<>();
+        visited.add(secVertex.get(0));
+        queue.add(secVertex.get(0));
+        while (!queue.isEmpty()) {
+            VertexObj<V,E> current = queue.poll();
+            for (EdgeObj<V,E> e : secEdge) {
+                VertexObj<V,E> neigh = null;
+                if (e.endVertex1 == current) neigh = e.endVertex2;
+                else if (e.endVertex2 == current) neigh = e.endVertex1;
+                if (neigh != null && visited.add(neigh)) {
+                    queue.add(neigh);
+                }
+            }
+        }
+        return visited.size() == secVertex.size();
+    }
+
     
 }
