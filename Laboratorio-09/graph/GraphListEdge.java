@@ -420,4 +420,20 @@ public class GraphListEdge<V,E> {
         }
         return g;
     }
+
+    public boolean esIsomorfo(GraphLink<E> g2) {
+        int n = listVertexSize();
+        if (n != g2.listVertexSize() || countEdges() != g2.countEdges()) return false;
+        if (n > 8) throw new IllegalArgumentException("Isomorfismo exacto limitado a n ≤ 8");
+
+        int[][] m1 = toMatrix(this);
+        int[][] m2 = toMatrix(g2);
+
+        int[] perm = new int[n];
+        for (int i = 0; i < n; i++) perm[i] = i;
+
+        return backtrackIso(0, perm, m1, m2);
+    }
+
+    
 }
