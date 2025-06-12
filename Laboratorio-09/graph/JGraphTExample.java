@@ -65,6 +65,12 @@ public class JGraphTExample {
         System.out.println("¿Grafo conectado? " + ci.isConnected());
         System.out.println("Componentes conectados: " + ci.connectedSets());
 
-        
+        // 6. Detección de ciclos
+        CycleDetector<String, DefaultEdge> cd =
+                new CycleDetector<>(graph);
+        System.out.println("¿Contiene ciclos? " + cd.detectCycles());
+        if (cd.detectCycles()) {
+            System.out.println("Vértices en algún ciclo: " + cd.findCycles());
+        }
     }
 }
