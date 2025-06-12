@@ -301,6 +301,50 @@ public class GraphLink<E> {
         return visitados.size() == totalVertices;
     }
 
+    public Stack<Vertex<E>> Dijkstra(E v, E w) {
+        // Buscar vértices origen y destino
+        Vertex<E> origen = null, destino = null;
+        for (Vertex<E> vert : listVertex) {
+            if (vert.getData().equals(v)) origen = vert;
+            if (vert.getData().equals(w)) destino = vert;
+        }
+        if (origen == null || destino == null) return new Stack<>();
+
+        // Inicializar distancias y predecesores
+        Map<Vertex<E>, Integer> dist = new HashMap<>();
+        Map<Vertex<E>, Vertex<E>> prev = new HashMap<>();
+        for (Vertex<E> vert : listVertex) dist.put(vert, Integer.MAX_VALUE);
+        dist.put(origen, 0);
+
+        PriorityQueue<Map.Entry<Vertex<E>, Integer>> pq =
+            new PriorityQueue<>(Comparator.comparingInt(Map.Entry::getValue));
+        pq.add(new AbstractMap.SimpleEntry<>(origen, 0));
+
+        // Ejecución de Dijkstra
+        while (!pq.isEmpty()) {
+            Vertex<E> u = pq.poll().getKey();
+            if (u.equals(destino)) break;
+            for (Edge<E> edge : u.listAdj) {
+                Vertex<E> neigh = edge.getRefDest();
+                int alt = dist.get(u) + edge.getWeight();
+                if (alt < dist.get(neigh)) {
+                    dist.put(neigh, alt);
+                    prev.put(neigh, u);
+                    pq.add(new AbstractMap.SimpleEntry<>(neigh, alt));
+                }
+            }
+        }
+
+        // Reconstruir ruta inversa en Stack
+        Stack<Vertex<E>> ruta = new Stack<>();
+        Vertex<E> paso = destino;
+        while (paso != null) {
+            ruta.push(paso);
+            paso = prev.get(paso);
+        }
+        return ruta;
+    }
+    
     public String toString() {  
         return this.listVertex.toString();
     }
