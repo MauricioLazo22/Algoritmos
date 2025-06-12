@@ -267,8 +267,41 @@ public class GraphLink<E> {
         }
         return path;
     }
-    
-    public String toString() {
+
+    public boolean isConexo() {
+        // Si no hay vértices o solo uno, se considera conexo
+        int totalVertices = 0;
+        Vertex<E> inicio = null;
+        for (Vertex<E> v : listVertex) {
+            totalVertices++;
+            if (inicio == null) {
+                inicio = v;
+            }
+        }
+        if (inicio == null || totalVertices <= 1) {
+            return true;
+        }
+
+        Set<Vertex<E>> visitados = new HashSet<>();
+        Queue<Vertex<E>> cola = new LinkedList<>();
+        cola.add(inicio);
+        visitados.add(inicio);
+
+        while (!cola.isEmpty()) {
+            Vertex<E> actual = cola.poll();
+            for (Edge<E> arista : actual.listAdj) {
+                Vertex<E> vecino = arista.getRefDest();
+                if (!visitados.contains(vecino)) {
+                    visitados.add(vecino);
+                    cola.add(vecino);
+                }
+            }
+        }
+
+        return visitados.size() == totalVertices;
+    }
+
+    public String toString() {  
         return this.listVertex.toString();
     }
 
