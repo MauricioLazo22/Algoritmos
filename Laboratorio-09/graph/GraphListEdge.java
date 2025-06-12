@@ -21,4 +21,28 @@ public class GraphListEdge<V,E> {
         VertexObj<V,E> newVertex = new VertexObj<>(info, pos);
         secVertex.add(newVertex);
     }
+
+    public void insertEdge(V v, V z) {
+        // Localizar vértices
+        VertexObj<V,E> vert1 = null, vert2 = null;
+        for (VertexObj<V,E> vertex : secVertex) {
+            if (vertex.info.equals(v)) vert1 = vertex;
+            if (vertex.info.equals(z)) vert2 = vertex;
+        }
+        // Si faltan vértices, no hacer nada
+        if (vert1 == null || vert2 == null) return;
+
+        // Comprobar que la arista no exista ya
+        for (EdgeObj<V,E> edge : secEdge) {
+            boolean direct = edge.endVertex1 == vert1 && edge.endVertex2 == vert2;
+            boolean inverse = edge.endVertex1 == vert2 && edge.endVertex2 == vert1;
+            if (direct || inverse) {
+                return;
+            }
+        }
+
+        // Insertar nueva arista
+        EdgeObj<V,E> newEdge = new EdgeObj<>(vert1, vert2, null, secEdge.size());
+        secEdge.add(newEdge);
+    }
 }
