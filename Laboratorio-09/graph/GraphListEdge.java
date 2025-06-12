@@ -106,5 +106,23 @@ public class GraphListEdge<V,E> {
         }
     }
 
+    public int grado(V info) {
+        VertexObj<V,E> vert = null;
+        for (VertexObj<V,E> v : secVertex) {
+            if (v.info.equals(info)) {
+                vert = v;
+                break;
+            }
+        }
+        if (vert == null) return 0;
+        int grado = 0;
+        for (EdgeObj<V,E> e : secEdge) {
+            if (e.endVertex1 == vert || e.endVertex2 == vert) {
+                grado++;
+            }
+        }
+        return grado;
+    }
+
     
 }
