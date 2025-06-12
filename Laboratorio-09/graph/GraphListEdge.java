@@ -276,5 +276,17 @@ public class GraphListEdge<V,E> {
         return 0;
     }
 
+    public int inDegree(E v) {
+        int count = 0;
+        for (Vertex<E> vert : listVertex) {
+            for (Edge<E> edge : vert.listAdj) {
+                if (edge.getRefDest().getData().equals(v)) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
     
 }
