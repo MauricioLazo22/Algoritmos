@@ -435,5 +435,57 @@ public class GraphListEdge<V,E> {
         return backtrackIso(0, perm, m1, m2);
     }
 
-    
+    private boolean backtrackIso(int idx, int[] perm, int[][] m1, int[][] m2) {
+        int n = perm.length;
+        if (idx == n) return matricesEqualUnderPerm(m1, m2, perm);
+
+        for (int i = idx; i < n; i++) {
+            swap(perm, idx, i);
+            if (backtrackIso(idx + 1, perm, m1, m2)) return true;
+            swap(perm, idx, i);
+        }
+        return false;
+    }
+
+    private boolean matricesEqualUnderPerm(int[][] a, int[][] b, int[] p) {
+        int n = p.length;
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < n; j++)
+                if (a[i][j] != b[p[i]][p[j]]) return false;
+        return true;
+    }
+
+    private void swap(int[] arr, int i, int j) {
+        int t = arr[i];
+        arr[i] = arr[j];
+        arr[j] = t;
+    }
+
+    private int[][] toMatrix(GraphLink<E> g) {
+        int n = g.listVertexSize();
+        Map<Vertex<E>, Integer> idx = new HashMap<>();
+        int k = 0;
+        for (Vertex<E> v : g.listVertex) idx.put(v, k++);
+        int[][] m = new int[n][n];
+        for (Vertex<E> v : g.listVertex) {
+            int i = idx.get(v);
+            for (Edge<E> e : v.listAdj) {
+                int j = idx.get(e.getRefDest());
+                m[i][j] = 1;
+            }
+        }
+        return m;
+    }
+
+    private int listVertexSize() {
+        int c = 0;
+        for (Vertex<E> v : listVertex) c++;
+        return c;
+    }
+
+    private int countEdges() {
+        int c = 0;
+        for (Vertex<E> v : listVertex) c += v.listAdj.size();
+        return c;
+    }
 }
