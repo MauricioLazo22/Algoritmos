@@ -26,8 +26,21 @@ public class BNode<E> {
     //Search for a key in the current node, if found it returns true and
     //the position where it is located, otherwise, returns false and the
     //position of the child where it should descend.
-    public boolean searchNode ( ) {
+    public boolean searchNode(E key, int[] pos) {
+        int i = 0;
+        while (i < count && keys.get(i) != null && key.compareTo(keys.get(i)) > 0) {
+            i++;
+        }
+
+        if (i < count && keys.get(i) != null && key.compareTo(keys.get(i)) == 0) {
+            pos[0] = i;
+            return true;
+        } else {
+            pos[0] = i;
+            return false;
+        }
     }
+    
     //Return the keys found in the node.
     public String toString(){
     }
