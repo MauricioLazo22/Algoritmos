@@ -9,17 +9,18 @@ public class BNode<E> {
         this.keys = new ArrayList<E>(n);
         this.childs = new ArrayList<BNode<E>>(n);
         this.count = 0;
-        for(int i=0; i < n;
-            i++){ this.keys.add(null);
+        for(int i=0; i < n; i++){ 
+            this.keys.add(null);
             this.childs.add(null);
         }
     }
     //Check if the current node is full
-    public boolean nodeFull () {
+    public boolean nodeFull(int maxKeys) {
+        return count == maxKeys;
     }
     //Check if the current node is empty
-    public boolean nodeEmpty () {
-
+    public boolean nodeEmpty() {
+        return count == 0;
     }
     
     //Search for a key in the current node, if found it returns true and
