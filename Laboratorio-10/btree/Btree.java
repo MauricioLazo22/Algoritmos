@@ -166,6 +166,14 @@ public class BTree<E extends Comparable<E>> {
         return true;
     }
 
+    private void removeFromLeaf(BNode<E> node, int idx) {
+        for (int i = idx; i < node.count - 1; i++) {
+            node.keys.set(i, node.keys.get(i + 1));
+        }
+        node.keys.set(node.count - 1, null);
+        node.count--;
+    }
+
     private String writeTree(BNode<E> current, Integer idPadre) {
         if (current == null) return "";
 
