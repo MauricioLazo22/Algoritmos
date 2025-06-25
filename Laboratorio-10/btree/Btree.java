@@ -92,6 +92,24 @@ public class BTree<E extends Comparable<E>> {
         return median;
     }
 
+    public boolean search(E cl) {
+        return searchSupport(this.root, cl);
+    }
+
+    private boolean searchSupport(BNode<E> node, E cl) {
+        if (node == null) return false;
+
+        int[] pos = new int[1];
+        boolean found = node.searchNode(cl, pos);
+        if (found) {
+            System.out.println(cl + " se encuentra en el nodo " + node.idNode + " en la posición " + pos[0]);
+            return true;
+        } else {
+            // Buscar recursivamente en el hijo correspondiente
+            return searchSupport(node.childs.get(pos[0]), cl);
+        }
+    }
+
     private String writeTree(BNode<E> current, Integer idPadre) {
         if (current == null) return "";
 
