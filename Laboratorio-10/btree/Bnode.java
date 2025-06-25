@@ -2,11 +2,12 @@ package Laboratorio-10.btree;
 
 public class BNode<E> {
     protected static int nodeCounter = 0; // Contador global de nodos
-    protected int idNode; // Identificador único de cada nodo
+    public int idNode; // Identificador único de cada nodo
     protected ArrayList<E> keys;
     protected ArrayList<BNode<E>> childs;
     protected int count;
 
+    // Constructor para uso normal (autoincrementa idNode)
     public BNode (int n){
         this.idNode = ++nodeCounter; // Asignar y aumentar el contador
         this.keys = new ArrayList<E>(n);
@@ -17,6 +18,21 @@ public class BNode<E> {
             this.childs.add(null);
         }
     }
+
+    // Constructor para reconstrucción desde archivo (asigna idNode manualmente)
+    public BNode(int n, int idNode) {
+        this.idNode = idNode;
+        // Importante: asegurar que nodeCounter nunca sea menor al id más grande ya asignado
+        if (idNode > nodeCounter) nodeCounter = idNode;
+        this.keys = new ArrayList<E>(n);
+        this.childs = new ArrayList<BNode<E>>(n);
+        this.count = 0;
+        for (int i = 0; i < n; i++) {
+            this.keys.add(null);
+            this.childs.add(null);
+        }
+    }
+
     //Check if the current node is full
     public boolean nodeFull(int maxKeys) {
         return count == maxKeys;
