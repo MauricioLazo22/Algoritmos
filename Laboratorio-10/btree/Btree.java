@@ -174,6 +174,33 @@ public class BTree<E extends Comparable<E>> {
         node.count--;
     }
 
+    private void adjust(BNode<E> node, int pos, boolean[] shrink) {
+        int minKeys = (orden - 1) / 2;
+        BNode<E> left = (pos > 0) ? node.childs.get(pos - 1) : null;
+        BNode<E> curr = node.childs.get(pos);
+        BNode<E> right = (pos < node.count) ? node.childs.get(pos + 1) : null;
+
+        // Intentar redistribuir con hermano izquierdo
+        if (left != null && left.count > minKeys) {
+            // Mover una clave del nodo padre hacia el hijo actual desde la izquierda
+            for (int i = curr.count; i > 0; i--) {
+                curr.keys.set(i, curr.keys.get(i - 1));
+                curr.childs.set(i + 1, curr.childs.get(i));
+            }
+            curr.childs.set(1, curr.childs.get(0));
+            curr.keys.set(0, node.keys.get(pos - 1));
+            curr.childs.set(0, left.childs.get(left.count));
+            curr.count++;
+
+            node.keys.set(pos - 1, left.keys.get(left.count - 1));
+            left.keys.set(left.count - 1, null);
+            left.childs.set(left.count, null);
+            left.count--;
+
+            shrink[0] = false;
+        }
+}
+
     private String writeTree(BNode<E> current, Integer idPadre) {
         if (current == null) return "";
 
