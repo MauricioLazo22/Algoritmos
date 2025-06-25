@@ -351,6 +351,21 @@ public class BTree<E extends Comparable<E>> {
             if (levelMap.get(node.idNode) != 0 && node.count < Math.ceil((double)orden / 2) - 1)
                 throw new ItemNoFound("Nodo con menos claves del mínimo: id=" + node.idNode);
         }
+
+        // Verificar que todas las hojas están en el mismo nivel
+        Set<Integer> hojaNiveles = new HashSet<>();
+        for (int id : nodeMap.keySet()) {
+            BNode<Integer> node = nodeMap.get(id);
+            boolean esHoja = true;
+            for (BNode<Integer> h : node.childs) if (h != null) esHoja = false;
+            if (esHoja) hojaNiveles.add(levelMap.get(id));
+        }
+        if (hojaNiveles.size() != 1) throw new ItemNoFound("Las hojas no están en el mismo nivel.");
+
+        // Finalmente, crear el árbol
+        BTree<Integer> btree = new BTree<>(orden);
+        btree.root = nodeMap.get(rootId);
+        return btree;
     }
 
     private String writeTree(BNode<E> current, Integer idPadre) {
