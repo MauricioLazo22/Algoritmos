@@ -276,6 +276,49 @@ public class BTree<E extends Comparable<E>> {
         }
     }
 
+    public static BTree<Integer> building_Btree(String filename) throws ItemNoFound {
+        Map<Integer, BNode<Integer>> nodeMap = new HashMap<>();
+        Map<Integer, Integer> levelMap = new HashMap<>();
+        Map<Integer, List<Integer>> childrenByParent = new HashMap<>();
+        int orden = 0;
+        int rootId = -1;
+
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            String line;
+            int lineNum = 0;
+
+            while ((line = br.readLine()) != null) {
+                line = line.trim();
+                if (line.isEmpty()) continue;
+                if (lineNum == 0) {
+                    orden = Integer.parseInt(line);
+                    lineNum++;
+                    continue;
+                }
+
+                // Parsear línea: nivel, idNodo, claves...
+                String[] parts = line.split(",");
+                if (parts.length < 3) throw new ItemNoFound("Formato incorrecto en el archivo.");
+
+                int nivel = Integer.parseInt(parts[0].replaceAll("\\D", "")); // 2, 1, 0...
+                int idNodo = Integer.parseInt(parts[1]);
+                List<Integer> claves = new ArrayList<>();
+                for (int i = 2; i < parts.length; i++) {
+                    claves.add(Integer.parseInt(parts[i]));
+                }
+                BNode<Integer> node = new BNode<>(orden);
+                node.idNode = idNodo; // Debes permitir en tu BNode setear el idNode manualmente para reconstrucción
+                node.count = claves.size();
+                for (int i = 0; i < claves.size(); i++) node.keys.set(i, claves.get(i));
+                nodeMap.put(idNodo, node);
+                levelMap.put(idNodo, nivel);
+                if (nivel == 0) rootId = idNodo;
+            }
+        } catch (IOException | NumberFormatException e) {
+            throw new ItemNoFound("Error al leer el archivo: " + e.getMessage());
+        }
+        
+    }
 
     private String writeTree(BNode<E> current, Integer idPadre) {
         if (current == null) return "";
