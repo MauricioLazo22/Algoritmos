@@ -140,4 +140,17 @@ public class BTree<E extends Comparable<E>> {
         if (sb.length() == 2) return "";
         return sb.toString();
     }
+
+    @Override
+    public String toString() {
+        String s = "";
+        if (isEmpty())
+            s += "BTree is empty...";
+        else {
+            // Encabezado de la tabla, puedes modificar el formato si prefieres tabulaciones o alineación
+            s += String.format("%-8s %-20s %-10s %-15s\n", "Id.Nodo", "Claves Nodo", "Id.Padre", "Id.Hijos");
+            s += writeTree(this.root, null);
+        }
+        return s;
+    }
 }
