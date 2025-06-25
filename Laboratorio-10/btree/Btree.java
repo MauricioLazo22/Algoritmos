@@ -110,6 +110,24 @@ public class BTree<E extends Comparable<E>> {
         }
     }
 
+    public boolean remove(E cl) {
+        if (isEmpty()) {
+            System.out.println("El árbol está vacío, no se puede eliminar.");
+            return false;
+        }
+        boolean[] shrink = new boolean[1]; // Bandera para indicar reducción de altura
+        boolean result = removeSupport(this.root, cl, shrink);
+        if (root.count == 0 && root.childs.get(0) != null) {
+            root = root.childs.get(0); // Propaga la raíz hacia abajo si se quedó vacía
+        }
+        if (result)
+            System.out.println("Clave " + cl + " eliminada correctamente.");
+        else
+            System.out.println("Clave " + cl + " no encontrada.");
+        return result;
+    }
+
+
     private String writeTree(BNode<E> current, Integer idPadre) {
         if (current == null) return "";
 
