@@ -20,4 +20,21 @@ public class PruebaAplicacion {
 
         System.out.println(arbolEstudiantes);
     }
+    
+    // Método estático para buscar estudiante por código en un BTree
+    public static RegistroEstudiante buscarPorCodigo(BTree<RegistroEstudiante> arbol, int codigo) {
+        return buscarRec(arbol.root, codigo);
+    }
+
+    private static RegistroEstudiante buscarRec(BNode<RegistroEstudiante> node, int codigo) {
+        if (node == null) return null;
+        for (int i = 0; i < node.count; i++) {
+            RegistroEstudiante est = node.keys.get(i);
+            if (est != null && est.getCodigo() == codigo)
+                return est;
+            if (est != null && codigo < est.getCodigo())
+                return buscarRec(node.childs.get(i), codigo);
+        }
+        return buscarRec(node.childs.get(node.count), codigo);
+    }
 }
