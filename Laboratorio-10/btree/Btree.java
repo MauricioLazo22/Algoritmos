@@ -199,7 +199,26 @@ public class BTree<E extends Comparable<E>> {
 
             shrink[0] = false;
         }
-}
+
+        // Intentar redistribuir con hermano derecho
+        else if (right != null && right.count > minKeys) {
+            curr.keys.set(curr.count, node.keys.get(pos));
+            curr.childs.set(curr.count + 1, right.childs.get(0));
+            curr.count++;
+
+            node.keys.set(pos, right.keys.get(0));
+            for (int i = 0; i < right.count - 1; i++) {
+                right.keys.set(i, right.keys.get(i + 1));
+                right.childs.set(i, right.childs.get(i + 1));
+            }
+            right.childs.set(right.count - 1, right.childs.get(right.count));
+            right.keys.set(right.count - 1, null);
+            right.childs.set(right.count, null);
+            right.count--;
+
+            shrink[0] = false;
+        }
+    }
 
     private String writeTree(BNode<E> current, Integer idPadre) {
         if (current == null) return "";
