@@ -1,3 +1,8 @@
+package Laboratorio-10.btree;
+
+import java.io.*;
+import java.util.*;
+
 public class BTree<E extends Comparable<E>> {
     private BNode<E> root;
     private int orden;
@@ -263,6 +268,14 @@ public class BTree<E extends Comparable<E>> {
             shrink[0] = node != root && node.count < minKeys;
         }
     }
+
+    // Excepción personalizada
+    public class ItemNoFound extends Exception {
+        public ItemNoFound(String message) {
+            super(message);
+        }
+    }
+
 
     private String writeTree(BNode<E> current, Integer idPadre) {
         if (current == null) return "";
