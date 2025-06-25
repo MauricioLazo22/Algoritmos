@@ -127,6 +127,44 @@ public class BTree<E extends Comparable<E>> {
         return result;
     }
 
+    private boolean removeSupport(BNode<E> node, E cl, boolean[] shrink) {
+        int[] pos = new int[1];
+        boolean found = node.searchNode(cl, pos);
+
+        if (found) {
+            if (node.childs.get(0) == null) { // Es hoja
+                removeFromLeaf(node, pos[0]);
+            } else { // Es nodo interno
+                // Reemplazar con predecesor
+                BNode<E> pred = node.childs.get(pos[0]);
+                while (pred.childs.get(pred.count) != null) {
+                    pred = pred.childs.get(pred.count);
+                }
+                E predKey = pred.keys.get(pred.count - 1);
+                node.keys.set(pos[0], predKey);
+                removeSupport(node.childs.get(pos[0]), predKey, shrink);
+            }
+        } else {
+            if (node.childs.get(0) == null) {
+                shrink[0] = false;
+                return false;
+            }
+            boolean res = removeSupport(node.childs.get(pos[0]), cl, shrink);
+            if (shrink[0]) {
+                adjust(node, pos[0], shrink);
+            }
+            return res;
+        }
+
+        // Después de eliminar, comprobar si hay que ajustar
+        int minKeys = (orden - 1) / 2;
+        if (node != root && node.count < minKeys) {
+            shrink[0] = true;
+        } else {
+            shrink[0] = false;
+        }
+        return true;
+    }
 
     private String writeTree(BNode<E> current, Integer idPadre) {
         if (current == null) return "";
