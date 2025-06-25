@@ -241,6 +241,27 @@ public class BTree<E extends Comparable<E>> {
             shrink[0] = node != root && node.count < minKeys;
         }
 
+        // Fusión con hermano izquierdo
+        else if (left != null) {
+            left.keys.set(left.count, node.keys.get(pos - 1));
+            left.count++;
+            for (int i = 0; i < curr.count; i++) {
+                left.keys.set(left.count, curr.keys.get(i));
+                left.childs.set(left.count, curr.childs.get(i));
+                left.count++;
+            }
+            left.childs.set(left.count, curr.childs.get(curr.count));
+            // Eliminar referencia del padre
+            for (int i = pos - 1; i < node.count - 1; i++) {
+                node.keys.set(i, node.keys.get(i + 1));
+                node.childs.set(i + 1, node.childs.get(i + 2));
+            }
+            node.keys.set(node.count - 1, null);
+            node.childs.set(node.count, null);
+            node.count--;
+
+            shrink[0] = node != root && node.count < minKeys;
+        }
     }
 
     private String writeTree(BNode<E> current, Integer idPadre) {
