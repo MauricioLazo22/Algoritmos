@@ -18,9 +18,41 @@ public class PruebaAplicacion {
         arbolEstudiantes.insert(new RegistroEstudiante(122, "Karina"));
         arbolEstudiantes.insert(new RegistroEstudiante(108, "Juan")); // Intento de duplicado
 
-        System.out.println(arbolEstudiantes);
+        // Búsqueda 1
+        RegistroEstudiante r = arbolEstudiantes.buscarPorCodigo(115);
+        if (r != null)
+            System.out.println(r.getNombre()); // Debe retornar: David
+        else
+            System.out.println("No encontrado");
+
+        // Búsqueda 2
+        r = arbolEstudiantes.buscarPorCodigo(132);
+        if (r != null)
+            System.out.println(r.getNombre()); // Debe retornar: Ernesto
+        else
+            System.out.println("No encontrado");
+
+        // Búsqueda 3
+        r = arbolEstudiantes.buscarPorCodigo(999);
+        if (r != null)
+            System.out.println(r.getNombre());
+        else
+            System.out.println("No encontrado"); // Debe retornar: No encontrado
+
+        // Eliminar al estudiante con código 101
+        arbolEstudiantes.remove(new RegistroEstudiante(101, "")); // Solo el código importa para comparar
+
+        // Insertar nuevo estudiante: (106, “Sara”)
+        arbolEstudiantes.insert(new RegistroEstudiante(106, "Sara"));
+
+        // Buscar estudiante con código 106
+        r = arbolEstudiantes.buscarPorCodigo(106);
+        if (r != null)
+            System.out.println(r.getNombre()); // Debe retornar: Sara
+        else
+            System.out.println("No encontrado");
     }
-    
+
     // Método estático para buscar estudiante por código en un BTree
     public static RegistroEstudiante buscarPorCodigo(BTree<RegistroEstudiante> arbol, int codigo) {
         return buscarRec(arbol.root, codigo);
