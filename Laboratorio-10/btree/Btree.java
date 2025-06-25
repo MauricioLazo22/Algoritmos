@@ -91,4 +91,26 @@ public class BTree<E extends Comparable<E>> {
         up = true;
         return median;
     }
+
+    private String writeTree(BNode<E> current, Integer idPadre) {
+        if (current == null) return "";
+
+        // Preparar claves y lista de hijos no-nulos
+        String claves = formatClaves(current);
+        String padre = (idPadre == null) ? "--" : String.format("[%d]", idPadre);
+        String hijos = formatHijos(current);
+
+        // Formateo tipo tabla, puedes ajustar los anchos de columna si lo deseas
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("%-8d %-20s %-10s %-15s\n", current.idNode, claves, padre, hijos));
+
+        // Recorrer hijos (solo los no-nulos), recursivo
+        for (int i = 0; i <= current.count; i++) {
+            BNode<E> child = current.childs.get(i);
+            if (child != null) {
+                sb.append(writeTree(child, current.idNode));
+            }
+        }
+        return sb.toString();
+    }
 }
