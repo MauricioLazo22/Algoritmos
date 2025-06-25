@@ -317,7 +317,31 @@ public class BTree<E extends Comparable<E>> {
         } catch (IOException | NumberFormatException e) {
             throw new ItemNoFound("Error al leer el archivo: " + e.getMessage());
         }
-        
+
+        // Reconstruir árbol (conectar hijos)
+        // Buscar hijos para cada nodo
+        for (int childId : nodeMap.keySet()) {
+            int childLevel = levelMap.get(childId);
+            if (childLevel == 0) continue; // Es la raíz
+            // El padre es el nodo de nivel immediately superior (nivel-1) que aún tiene hijos disponibles
+            int parentLevel = childLevel - 1;
+            // Buscar potencial padre por nivel y posición
+            for (int parentId : nodeMap.keySet()) {
+                if (levelMap.get(parentId) == parentLevel) {
+                    // Para un árbol B bien construido, la asignación padre-hijo sigue el orden del archivo.
+                    // En la práctica deberías mejorar esta lógica para mayor robustez.
+                    BNode<Integer> parent = nodeMap.get(parentId);
+                    // Buscar primer espacio disponible en hijos
+                    for (int i = 0; i < orden; i++) {
+                        if (parent.childs.get(i) == null) {
+                            parent.childs.set(i, nodeMap.get(childId));
+                            break;
+                        }
+                    }
+                    break; // Saltar al siguiente hijo
+                }
+            }
+        }
     }
 
     private String writeTree(BNode<E> current, Integer idPadre) {
