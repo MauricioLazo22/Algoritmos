@@ -113,4 +113,31 @@ public class BTree<E extends Comparable<E>> {
         }
         return sb.toString();
     }
+
+    private String formatClaves(BNode<E> node) {
+        StringBuilder sb = new StringBuilder("(");
+        for (int i = 0; i < node.count; i++) {
+            sb.append(node.keys.get(i));
+            if (i < node.count - 1) sb.append(", ");
+        }
+        sb.append(")");
+        return sb.toString();
+    }
+
+    private String formatHijos(BNode<E> node) {
+        StringBuilder sb = new StringBuilder("[");
+        boolean primero = true;
+        for (int i = 0; i <= node.count; i++) {
+            BNode<E> child = node.childs.get(i);
+            if (child != null) {
+                if (!primero) sb.append(", ");
+                sb.append(child.idNode);
+                primero = false;
+            }
+        }
+        sb.append("]");
+        // Si no hay hijos, dejar vacío entre corchetes
+        if (sb.length() == 2) return "";
+        return sb.toString();
+    }
 }
