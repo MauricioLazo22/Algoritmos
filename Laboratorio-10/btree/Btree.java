@@ -342,6 +342,15 @@ public class BTree<E extends Comparable<E>> {
                 }
             }
         }
+
+        // Verificaciones de propiedades del árbol B:
+        for (BNode<Integer> node : nodeMap.values()) {
+            // Todas las claves en rango permitido
+            if (node.count > orden - 1) throw new ItemNoFound("Nodo con demasiadas claves: id=" + node.idNode);
+            // Raíz puede tener menos claves, los demás no
+            if (levelMap.get(node.idNode) != 0 && node.count < Math.ceil((double)orden / 2) - 1)
+                throw new ItemNoFound("Nodo con menos claves del mínimo: id=" + node.idNode);
+        }
     }
 
     private String writeTree(BNode<E> current, Integer idPadre) {
